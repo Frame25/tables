@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Frame25/tables/issues"
   },
-  "homepage": "https://github.com/Frame25/tables#readme"
+  "homepage": "https://github.com/Frame25/tables#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-pug": "^4.0.1",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.10.0"
+  }
 }
