@@ -21,7 +21,7 @@ button.onclick = function () {
 
   el.dblclick(selectUnselect);
 
-  var timer = void 0;
+  var timer = 0;
 
   el.touchstart(function () {
     timer = setTimeout(function () {
