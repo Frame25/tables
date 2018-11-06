@@ -15,7 +15,7 @@ button.onclick = function () {
     if (el._memory._selectHandler && el._memory._selectHandler.rectSelection.isSelected) {
       el.selectize(false);
     } else {
-      el.selectize({ deepSelect: true, pointSize: 10 }).resize({ snapToGrid: 20, snapToAngle: 90 });
+      el.selectize({ deepSelect: true, pointSize: 15 }).resize({ snapToGrid: 20, snapToAngle: 90 });
     }
   }
 
