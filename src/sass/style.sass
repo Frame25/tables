@@ -1,3 +1,5 @@
+@import defaults
+
 #app
   width: 100%
   height: 100%
@@ -12,21 +14,38 @@
     background: #f2f2f2
     padding: 10px 30px
     display: flex
-    .btn
+
+  .btn
+    display: inline-block
+    padding: 10px
+    cursor: pointer
+    user-select: none
+    margin-right: 16px
+    border-radius: 2px
+
+    &.grad
       background: linear-gradient(to top right, teal, violet)
-      display: inline-block
-      padding: 10px
-      cursor: pointer
-      user-select: none
-      margin-right: 16px
       color: white
+
+    &.grey
+      background: #b3b3b3
 
   .block-menu
     position: fixed
     bottom: 0
     left: 0
     width: 100vw
-    height: 100px
     background: #f2f2f2
+    display: flex
+    padding: 10px 30px
+    opacity: 0
+    pointer-events: none
+    transform: translate(30px)
+    +transition()
+
+    &.show
+      opacity: 1
+      transform: none
+      pointer-events: all
 
 
