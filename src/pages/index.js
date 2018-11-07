@@ -75,3 +75,7 @@ function exportSvg () {
 btnAddTable.addEventListener('click', createTable)
 btnAddText.addEventListener('click', addText)
 btnExport.addEventListener('click', exportSvg)
+
+window.huy = () => {
+  createTable()
+}
