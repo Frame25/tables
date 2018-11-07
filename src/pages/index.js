@@ -4,8 +4,6 @@ import SVG from 'svg.js'
 import draggable from '../libs/draggable/draggable'
 import resize from '../libs/resize/resize'
 import select from '../libs/select/select.js'
-import { width } from 'window-size';
-import { platform } from 'os';
 
 // ------------------------------------------
 // GLOBAL LIBS
@@ -31,8 +29,10 @@ let exportObj = {
   elements: []
 }
 let defaults = {
-  snapToGrid: 20,
-  snapToAngle:90,
+  
+  selectOptions: {pointSize: 15},
+  dragOptions: {snapToGrid: 20},
+  resizeOptions: {snapToGrid:20, snapToAngle:90},
   table: {
     x: 10,
     y: 10,
@@ -48,11 +48,14 @@ let defaults = {
   },
   line: {
     dots: [
-      [0, 0],
-      [100, 100]
+      [10, 10],
+      [10, 30],
+      [360, 30],
+      [360, 10]
+
     ],
     stroke: {
-      width: 3,
+      width: 5,
       color: '#b3b3b3'
     },
     fill: 'none'
@@ -71,34 +74,21 @@ const removeBtn = document.querySelector('.remove-element')
 // DRAW FUNCTIONS
 // ------------------------------------------
 
-// Release select / unselect element
-function selectUnselect (el) {
-  let timer
-  function action () {
-    if (el._memory._selectHandler &&  el._memory._selectHandler.rectSelection.isSelected) {
-      selectedElement = null
-      el.selectize(false)
-      hideMenu()
-    } else {
-      selectedElement = el
-      unselectAll(el)
-      el.selectize({deepSelect:true, pointSize: 15}).resize({snapToGrid:20, snapToAngle:90})
-      showMenu()
-    }
-  }
-  el.dblclick(action)
-  el.touchstart(() => {
-    timer = setTimeout(() => {
-      action()
-    }, 1000)
-  })
-  el.touchend(() => {
-    clearTimeout(timer)
-  })
+d.click(unselectAll)
+d.touchstart(unselectAll)
+
+function selectElement (event, el) {
+  event.stopPropagation()
+  unselectAll(el)
+  selectedElement = el
+  el.selectize(defaults.selectOptions).resize(defaults.resizeOptions)
+  showMenu()
 }
 
 // Unselect all elements
 function unselectAll () {
+  selectedElement = null
+  hideMenu()
   existElements.forEach(el => {
     el.selectize(false)
   })
@@ -106,23 +96,39 @@ function unselectAll () {
 
 // Creates new table
 function createTable () {
-  let table = d.image(imgTable, 100, 100).draggable({snapToGrid: 20})
-  selectUnselect(table)
+  let table = d.image(imgTable, 100, 100).draggable(defaults.dragOptions)
+  table.click(event => {
+    selectElement(event, table)
+  })
+  table.touchstart(event => {
+    selectElement(event, table)
+  })
   existElements.push(table)
 }
 
 // Creates new text block
 function addText () {
   let text = prompt('Enter text')
-  let textBlock = d.text(text).draggable({snapToGrid: 20}).font({size: 40})
-  selectUnselect(textBlock)
+  let textBlock = d.text(text).draggable(defaults.dragOptions).font(defaults.text.font)
+  textBlock.click(event => {
+    selectElement(event, textBlock)
+  })
+  textBlock.touchstart(event => {
+    selectElement(event, textBlock)
+  })
   existElements.push(textBlock)
 }
 
 // Creates new line
 function addLine () {
-  let line = d.polyline(defaults.line.dots).stroke(defaults.line.stroke).fill(defaults.line.fill).draggable(defaults.snapToGrid)
-  selectUnselect(line)
+  let line = d.polyline(defaults.line.dots).stroke(defaults.line.stroke).fill('#b3b3b3').draggable(defaults.dragOptions)
+  line.click(event => {
+    selectElement(event, line)
+  })
+  line.touchstart(event => {
+    selectElement(event, line)
+  })
+  existElements.push(line)
 }
 
 // Copy selected element
@@ -131,9 +137,14 @@ function copyElement (event, el = selectedElement) {
   if (el) {
     let elNew = el.clone()
     elNew.draggable(defaults.snapToGrid)
-    selectUnselect(elNew)
     elNew.dx(10)
     elNew.dy(10)
+    elNew.click(event => {
+      selectElement(event, elNew)
+    })
+    elNew.touchstart(event => {
+      selectElement(event, elNew)
+    })
     existElements.push(elNew)
   }
 }
@@ -142,6 +153,12 @@ function copyElement (event, el = selectedElement) {
 function removeElement(event, el = selectedElement) {
   el.selectize(false)
   el.draggable(false)
+  existElements.forEach((elem, index) => {
+    if (elem.id() === el.id()) {
+      existElements.splice(index, 1)
+      return false
+    }
+  })
   el.remove()
 }
 
@@ -185,3 +202,10 @@ btnAddLine.addEventListener('click', addLine)
 copyBtn.addEventListener('click', copyElement)
 removeBtn.addEventListener('click', removeElement)
 btnExport.addEventListener('click', exportSvg)
+
+// ------------------------------------------
+// TEST
+// ------------------------------------------
+window.test = () => {
+  return existElements
+}
