@@ -74,6 +74,7 @@ function selectUnselect (el) {
   }
   el.dblclick(action)
   el.touchstart(() => {
+    window.postMessage('huyhuyhuy')
     timer = setTimeout(() => {
       action()
     }, 1000)
