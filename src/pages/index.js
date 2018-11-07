@@ -74,7 +74,6 @@ function selectUnselect (el) {
   }
   el.dblclick(action)
   el.touchstart(() => {
-    window.postMessage('huyhuyhuy')
     timer = setTimeout(() => {
       action()
     }, 1000)
@@ -125,7 +124,9 @@ function exportSvg () {
   })
   console.log(exportObj)
 }
-
+setTimeout(() => {
+  window.postMessage('huyhuyhuy')
+}, 3000) 
 let line = d.line(defaults.line.dots).stroke(defaults.line.stroke).draggable(defaults.snapToGrid)
 selectUnselect(line)
 // ------------------------------------------
