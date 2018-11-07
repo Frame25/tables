@@ -1,32 +1,39 @@
 #app {
   width: 100%;
-  height: 100%; }
-
-#drawing {
-  border: solid 1px lightgrey;
-  margin: 5px;
-  height: 1000px;
-  width: 100%; }
-
-.navs {
-  background: #f2f2f2;
-  padding: 10px 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
-  .navs .btn {
-    background: -webkit-gradient(linear, left bottom, right top, from(teal), to(violet));
-    background: -webkit-linear-gradient(bottom left, teal, violet);
-    background: -o-linear-gradient(bottom left, teal, violet);
-    background: linear-gradient(to top right, teal, violet);
-    display: inline-block;
-    padding: 10px;
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    margin-right: 16px; }
+  height: 100%;
+  overflow: scroll; }
+  #app #drawing {
+    border: solid 1px lightgrey;
+    margin: 5px;
+    height: 900px;
+    width: 1440px; }
+  #app .navs {
+    background: #f2f2f2;
+    padding: 10px 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    #app .navs .btn {
+      background: -webkit-gradient(linear, left bottom, right top, from(teal), to(violet));
+      background: -webkit-linear-gradient(bottom left, teal, violet);
+      background: -o-linear-gradient(bottom left, teal, violet);
+      background: linear-gradient(to top right, teal, violet);
+      display: inline-block;
+      padding: 10px;
+      cursor: pointer;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      margin-right: 16px;
+      color: white; }
+  #app .block-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100px;
+    background: #f2f2f2; }
 .svg_select_points_lt {
   cursor: nw-resize; }
 
