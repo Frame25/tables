@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.1.0",
-    "svg.js": "^2.6.6"
+    "svg.js": "^2.6.6",
+    "svgson": "^3.0.0"
   }
 }

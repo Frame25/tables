@@ -8,12 +8,26 @@
   #drawing
     border: solid 1px lightgrey
     margin: 5px
-    height: 900px
-    width: 1440px
+    height: 100%
+    width: 100%
+
+    .selected-element
+      rect
+        stroke: $blue
+        stroke-width: 2px
+        stroke-dashoffset: -2px
+      > tspan
+        outline: $blue solid 2px
+
+    
   .navs
     background: #f2f2f2
     padding: 10px 30px
     display: flex
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
 
   .btn
     display: inline-block
@@ -31,7 +45,7 @@
       background: #b3b3b3
 
   .block-menu
-    position: fixed
+    position: absolute
     bottom: 0
     left: 0
     width: 100vw
