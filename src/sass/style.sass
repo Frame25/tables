@@ -1,7 +1,10 @@
 @import defaults
-
 body
   overflow: hidden
+  font-family: 'Helvetica', Arial, sans-serif
+
+div
+  box-sizing: border-box
 
 #app
   width: 100%
@@ -30,36 +33,85 @@ body
         outline: $blue solid 2px
 
   .editor-menu
-    background: #f2f2f2
+    background: $menu-bg
     padding: 10px 30px
     display: flex
     position: fixed
     bottom: 0
     left: 0
     right: 0
-    // width: 100%
 
   .interface__btn
     display: inline-block
-    padding: 10px
+    padding: 11px 16px
     cursor: pointer
     user-select: none
-    margin-right: 16px
     border-radius: 2px
 
-    &.grad
-      background: linear-gradient(to top right, teal, violet)
-      color: white
+    .btn__icon
+      width: 66px
+      height: 66px
+      padding: 20px
+      border-radius: 8px
 
-    &.grey
-      background: #b3b3b3
+      &.icon-rotate
+        background: white url('../img/rotate.png') center no-repeat
+        background-size: 30px
+        &.right
+          transform: scaleX(-1)
+      &.icon-copy
+        background: white url('../img/copy.png') center no-repeat
+        background-size: 30px
+      &.icon-remove
+        background: white url('../img/trash.png') center no-repeat
+        background-size: 30px
+      &.icon-decor
+        background: white url('../img/decor.svg') center no-repeat
+        background-size: 44px
+      &.icon-table
+        background: white url('../img/sofa.png') 38px 10px no-repeat
+        background-size: 15px
+        position: relative
+        .table-guest
+          position: absolute
+          top: 4px
+          right: 4px
+          font-weight: 200
+          font-size: 17px
+      &.icon-text
+        background: white
+        text-align: center
+        font-size: 36px
+        line-height: .9
+      &.icon-line
+        background: white
+        position: relative
+        .line
+          position: absolute
+          width: 22px
+          height: 44px
+          top: 11px
+          left: 23px
+          border-radius: 50px
+          &.grey
+            background-color: $grey
+          &.brown
+            background-color: $brown
+          &.blue
+            background-color: $blue
+
+    .btn__text
+      text-align: center
+      font-weight: 300
+      margin-top: 5px
+      font-size: 10px
 
   .element-menu
     position: fixed
     bottom: 0
     left: 0
     right: 0
-    background: #f2f2f2
+    background: $menu-bg
     display: flex
     padding: 10px 30px
 

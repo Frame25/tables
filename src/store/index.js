@@ -70,9 +70,9 @@ const store = new Vuex.Store({
       glass: {
         stroke: {
           color: '#84d4fb',
-          width: 6,
+          width: 11,
           linecap: 'round',
-          dasharray: '110 6'
+          dasharray: '110 11'
         }
       }
     }

@@ -1,3 +1,4 @@
+import 'normalize.css'
 import '../sass/style.sass'
 import '../libs/select/select.css'
 import Vue from 'vue'

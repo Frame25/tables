@@ -34,7 +34,7 @@ const build = {
             {
               loader: 'css-loader',
               options: {
-                // url: false,
+                url: false,
                 minimize: true,
                 sourceMap: true
               }

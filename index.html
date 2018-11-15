@@ -4,32 +4,74 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?29253f6ce6c2ec792012" rel="stylesheet"></head>
+  <link href="css/index.css?e593bd0120750c30ae18" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
       <div id="interface">
         <transition-group name="fade">
           <div class="editor-menu" v-if="$store.state.editorMenu" key="one">
-            <div class="interface__btn grad add-table" @click="$store.dispatch('addTable')">Add table</div>
-            <div class="interface__btn grad add-text" @click="$store.dispatch('addText')">Add text</div>
-            <div class="interface__btn grad add-line" @click="$store.dispatch('addLine')">Add wall</div>
-            <div class="interface__btn grad add-bar" @click="$store.dispatch('addLine2')">Add bar</div>
-            <div class="interface__btn grad add-window" @click="$store.dispatch('addGlass')">Add windows</div>
-            <div class="interface__btn grad add-decor" @click="$store.dispatch('addDecor')">Add decor</div>
-            <div class="interface__btn grad export" @click="$store.dispatch('exportData')">Export</div>
-            <div class="interface__btn grad clear" @click="$store.dispatch('clearAll')">Clear</div>
+            <div class="interface__btn add-table" @click="$store.dispatch('addTable')"> 
+              <div class="btn__icon icon-table">
+                <div class="table-guest">2</div>
+              </div>
+              <div class="btn__text">Add table</div>
+            </div>
+            <div class="interface__btn add-text" @click="$store.dispatch('addText')"> 
+              <div class="btn__icon icon-text">T</div>
+              <div class="btn__text">Add text</div>
+            </div>
+            <div class="interface__btn add-line" @click="$store.dispatch('addLine')"> 
+              <div class="btn__icon icon-line">
+                <div class="line grey"></div>
+              </div>
+              <div class="btn__text">Add wall</div>
+            </div>
+            <div class="interface__btn add-bar" @click="$store.dispatch('addLine2')"> 
+              <div class="btn__icon icon-line">
+                <div class="line brown"></div>
+              </div>
+              <div class="btn__text">Add bar</div>
+            </div>
+            <div class="interface__btn add-window" @click="$store.dispatch('addGlass')"> 
+              <div class="btn__icon icon-line">
+                <div class="line blue"></div>
+              </div>
+              <div class="btn__text">Add windows</div>
+            </div>
+            <div class="interface__btn add-decor" @click="$store.dispatch('addDecor')"> 
+              <div class="btn__icon icon-decor"></div>
+              <div class="btn__text">Add decor</div>
+            </div>
+            <div class="interface__btn export" @click="$store.dispatch('exportData')"> 
+              <div class="btn__icon icon-text">E</div>
+              <div class="btn__text">Export</div>
+            </div>
+            <div class="interface__btn clear" @click="$store.dispatch('clearAll')"> 
+              <div class="btn__icon icon-text">C</div>
+              <div class="btn__text">Clear</div>
+            </div>
           </div>
           <div class="element-menu" v-if="$store.state.elementMenu &amp;&amp; $store.state.selectedElement" key="two">
-            <div class="interface__input table-number">Table number</div>
-            <div class="interface__input table-guests">Number of guests</div>
-            <div class="interface__btn grey rotate-left">Rotate left</div>
-            <div class="interface__btn grey rotate-right">Rotate right</div>
-            <div class="interface__btn grey copy-element" @click="$store.dispatch('copyElement')">Copy</div>
-            <div class="interface__btn grey remove-element" @click="$store.dispatch('removeElement')">Remove</div>
+            <div class="interface__btn rotate-left">
+              <div class="btn__icon icon-rotate"></div>
+              <div class="btn__text">Rotate left</div>
+            </div>
+            <div class="interface__btn rotate-right">
+              <div class="btn__icon icon-rotate right"></div>
+              <div class="btn__text">Rotate right</div>
+            </div>
+            <div class="interface__btn copy-element" @click="$store.dispatch('copyElement')">
+              <div class="btn__icon icon-copy"></div>
+              <div class="btn__text">Copy</div>
+            </div>
+            <div class="interface__btn remove-element" @click="$store.dispatch('removeElement')">
+              <div class="btn__icon icon-remove"></div>
+              <div class="btn__text">Remove</div>
+            </div>
           </div>
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?29253f6ce6c2ec792012"></script></body>
+  <script type="text/javascript" src="js/index.js?e593bd0120750c30ae18"></script></body>
 </html>

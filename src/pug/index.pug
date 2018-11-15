@@ -10,18 +10,46 @@ html(lang="en")
       #interface
         transition-group(name="fade")
           .editor-menu(v-if="$store.state.editorMenu" key="one")
-            .interface__btn.grad.add-table(@click="$store.dispatch('addTable')") Add table
-            .interface__btn.grad.add-text(@click="$store.dispatch('addText')") Add text
-            .interface__btn.grad.add-line(@click="$store.dispatch('addLine')") Add wall
-            .interface__btn.grad.add-bar(@click="$store.dispatch('addLine2')") Add bar
-            .interface__btn.grad.add-window(@click="$store.dispatch('addGlass')") Add windows
-            .interface__btn.grad.add-decor(@click="$store.dispatch('addDecor')") Add decor
-            .interface__btn.grad.export(@click="$store.dispatch('exportData')") Export
-            .interface__btn.grad.clear(@click="$store.dispatch('clearAll')") Clear
+            .interface__btn.add-table(@click="$store.dispatch('addTable')") 
+              .btn__icon.icon-table
+                .table-guest 2
+              .btn__text Add table
+            .interface__btn.add-text(@click="$store.dispatch('addText')") 
+              .btn__icon.icon-text T
+              .btn__text Add text
+            .interface__btn.add-line(@click="$store.dispatch('addLine')") 
+              .btn__icon.icon-line
+                .line.grey
+              .btn__text Add wall
+            .interface__btn.add-bar(@click="$store.dispatch('addLine2')") 
+              .btn__icon.icon-line
+                .line.brown
+              .btn__text Add bar
+            .interface__btn.add-window(@click="$store.dispatch('addGlass')") 
+              .btn__icon.icon-line
+                .line.blue
+              .btn__text Add windows
+            .interface__btn.add-decor(@click="$store.dispatch('addDecor')") 
+              .btn__icon.icon-decor
+              .btn__text Add decor
+            .interface__btn.export(@click="$store.dispatch('exportData')") 
+              .btn__icon.icon-text E
+              .btn__text Export
+            .interface__btn.clear(@click="$store.dispatch('clearAll')") 
+              .btn__icon.icon-text C
+              .btn__text Clear
           .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
-            .interface__input.table-number Table number
-            .interface__input.table-guests Number of guests
-            .interface__btn.grey.rotate-left Rotate left
-            .interface__btn.grey.rotate-right Rotate right
-            .interface__btn.grey.copy-element(@click="$store.dispatch('copyElement')") Copy
-            .interface__btn.grey.remove-element(@click="$store.dispatch('removeElement')") Remove
+            //- .interface__input.table-number Table number
+            //- .interface__input.table-guests Number of guests
+            .interface__btn.rotate-left
+              .btn__icon.icon-rotate
+              .btn__text Rotate left
+            .interface__btn.rotate-right
+              .btn__icon.icon-rotate.right
+              .btn__text Rotate right
+            .interface__btn.copy-element(@click="$store.dispatch('copyElement')")
+              .btn__icon.icon-copy
+              .btn__text Copy
+            .interface__btn.remove-element(@click="$store.dispatch('removeElement')")
+              .btn__icon.icon-remove
+              .btn__text Remove
