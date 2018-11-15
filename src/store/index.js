@@ -102,7 +102,19 @@ const store = new Vuex.Store({
 
     // ----------- ELEMENTS` ACTIONS ->
     registerSelectElement ({ state, dispatch, commit }, elem) {
-      elem.click((event) => {
+      elem.click(event => {
+        event.stopPropagation()
+        dispatch('unselectAll')
+        commit('setSelectedEl', elem)
+        elem.draggable(state.defs.dragOptions)
+        if (elem.type === 'line')
+          elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
+        else
+          elem.addClass(state.defs.selectClass)
+        commit('setElementMenu', true)
+        commit('setEditorMenu', false)
+      })
+      elem.touchstart(event => {
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
