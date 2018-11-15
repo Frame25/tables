@@ -87,8 +87,11 @@ const store = new Vuex.Store({
     setElementMenu (state, val) {
       state.elementMenu = val
     },
-    increaseTable (state) {
-      state.tableCount++
+    increaseTable (state, minus) {
+      if (minus)
+        state.tableCount--
+      else
+        state.tableCount++
     }
   },
   actions: {
@@ -136,19 +139,21 @@ const store = new Vuex.Store({
         if (this.hasClass(state.defs.selectClass)) this.removeClass(state.defs.selectClass)
       })
     },
-    copyElement ({ state, dispatch }) {
+    copyElement ({ state, dispatch, commit }) {
       if (state.selectedElement) {
+        if (state.selectedElement.type === 'rect') commit('increaseTable')
         let elNew = state.selectedElement.clone()
         elNew.draggable(state.defs.dragOptions).dmove(44, 44)
         dispatch('registerSelectElement', elNew)
       }
     },
-    removeElement({ state }) {
+    removeElement({ state, dispatch }) {
       if (state.selectedElement) {
         state.selectedElement.selectize(false, {deepSelect: true})
         .resize(false)
         .draggable(false)
         .remove()
+        dispatch('unselectAll')
       }
     },
     clearAll ({ state, dispatch }) {
