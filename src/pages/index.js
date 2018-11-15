@@ -25,7 +25,7 @@ function giveMeAll(selector) {
 }
 
 const imgUrl = '/img/decor.svg'
-let d = SVG('drawing').size(1440, 900).viewbox(0, 0, 1440, 900)
+const d = SVG('drawing').size('100%', '100%').viewbox(0, 0, 1440, 900)
 let pressed = false
 let selectedElement = null
 let btnAddTable = giveMe('.add-table')
@@ -45,9 +45,13 @@ let defs = {
   selectClass: 'selected-element',
   dragOptions: {snapToGrid: 22},
   resizeOptions: {snapToGrid: 22, snapToAngle: 45},
+  startPos: {
+    x: 22,
+    y: 22
+  },
   table: {
-    x: 10,
-    y: 10,
+    x: 22,
+    y: 22,
     width: 66,
     height: 66,
     radius: 4,
@@ -65,13 +69,13 @@ let defs = {
     font: {
       size: 40
     },
-    x: 10,
-    y: 10
+    x: 22,
+    y: 22
   },
   line: {
     dots: [
-      [10, 10],
-      [60, 10]
+      [22, 22],
+      [66, 22]
     ],
     stroke: {
       width: 22,
@@ -82,8 +86,8 @@ let defs = {
   },
   line2: {
     dots: [
-      [10, 10],
-      [60, 10]
+      [22, 22],
+      [66, 22]
     ],
     stroke: {
       width: 22,
@@ -94,8 +98,8 @@ let defs = {
   },
   glass: {
     dots: [
-      [10, 10],
-      [60, 10]
+      [22, 22],
+      [66, 22]
     ],
     stroke: {
       color: '#84d4fb',
@@ -158,7 +162,7 @@ function createTable () {
   .fill(defs.table.fill)
   .radius(defs.table.radius)
 
-  group.add(table).add(num).move(defs.table.x, defs.table.y).draggable(defs.dragOptions)
+  group.add(table).add(num).move(defs.startPos.x, defs.startPos.y).draggable(defs.dragOptions)
 
   tableCount++
   group.click(event => {
@@ -167,20 +171,18 @@ function createTable () {
   group.touchstart(event => {
     selectElement(event, group)
   })
-  // existElements.push(group)
 }
 
 // Creates new text block
 function addText () {
   let text = prompt('Enter text')
-  let textBlock = d.text(text).draggable(defs.dragOptions).font(defs.text.font)
+  let textBlock = d.text(text).draggable(defs.dragOptions).font(defs.text.font).move(defs.startPos.x, defs.startPos.y)
   textBlock.click(event => {
     selectElement(event, textBlock)
   })
   textBlock.touchstart(event => {
     selectElement(event, textBlock)
   })
-  // existElements.push(textBlock)
 }
 
 // Creates new line
@@ -192,7 +194,6 @@ function addLine () {
   line.touchstart(event => {
     selectElement(event, line)
   })
-  // existElements.push(line)
 }
 
 // Creates new line2
@@ -204,7 +205,6 @@ function addLine2 () {
   line.touchstart(event => {
     selectElement(event, line)
   })
-  // existElements.push(line)
 }
 
 // Creates new line-windows
@@ -216,12 +216,11 @@ function addGlass () {
   line.touchstart(event => {
     selectElement(event, line)
   })
-  // existElements.push(line)
 }
 
 // Creates new decor element
 function addDecor () {
-  let decor = d.image(imgUrl).draggable(defs.dragOptions)
+  let decor = d.image(imgUrl).draggable(defs.dragOptions).move(defs.startPos.x, defs.startPos.y)
   decor.click(event => {
     selectElement(event, decor)
   })
@@ -241,7 +240,6 @@ function copyElement (event, el = selectedElement) {
     elNew.touchstart(event => {
       selectElement(event, elNew)
     })
-    // existElements.push(elNew)
   }
 }
 
@@ -254,16 +252,14 @@ function removeElement(event, el = selectedElement) {
 
 // Exports result SVG & JSON without selections
 function exportSvg () {
+  let expData = {
+    
+  }
   d.each(function () {
     this.draggable(false)
     this.selectize(false)
     this.resize(false)
     if (this.node.children[0] && this.node.children[0].classList.contains('svg_select_points')) this.remove()
-  })
-
-  svgson.parse(d.svg()).then(json => {
-    window.postMessage(json)
-    console.log(svgson.stringify(json))
   })
 }
 
