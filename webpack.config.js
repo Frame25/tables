@@ -64,6 +64,16 @@ const build = {
             pretty: true
           }
         }
+      },
+      // Vue
+      {
+        test: /\.vue$/,
+        use: {
+          loader: 'vue-loader',
+          options: {
+            extractCSS: true
+          }
+        }
       }
     ]
   },
@@ -77,7 +87,13 @@ const build = {
     new ExtractTextPlugin({
       filename: 'css/[name].css?[hash]'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.jsx', '.vue', '.json']
+  }
 }
 
 const dev = {

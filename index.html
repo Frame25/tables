@@ -4,24 +4,32 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?7de3c1ab58ecb405adb9" rel="stylesheet"></head>
+  <link href="css/index.css?e1d16f47ae8dafad5dfa" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
-      <div class="navs">
-        <div class="btn grad add-table">Add table</div>
-        <div class="btn grad add-text">Add text</div>
-        <div class="btn grad add-line">Add wall</div>
-        <div class="btn grad add-bar">Add bar</div>
-        <div class="btn grad add-window">Add windows</div>
-        <div class="btn grad add-decor">Add decor</div>
-        <div class="btn grad export">Export</div>
-        <div class="btn grad clear">Clear</div>
-      </div>
-      <div class="block-menu">
-        <div class="btn grey copy-element">Copy</div>
-        <div class="btn grey remove-element">Remove</div>
+      <div id="interface">
+        <transition-group name="fade">
+          <div class="editor-menu" v-if="$store.state.editorMenu" key="one">
+            <div class="interface__btn grad add-table" @click="$store.dispatch('addTable')">Add table</div>
+            <div class="interface__btn grad add-text" @click="$store.dispatch('addText')">Add text</div>
+            <div class="interface__btn grad add-line" @click="$store.dispatch('addLine')">Add wall</div>
+            <div class="interface__btn grad add-bar" @click="$store.dispatch('addLine2')">Add bar</div>
+            <div class="interface__btn grad add-window" @click="$store.dispatch('addGlass')">Add windows</div>
+            <div class="interface__btn grad add-decor" @click="$store.dispatch('addDecor')">Add decor</div>
+            <div class="interface__btn grad export" @click="$store.dispatch('exportData')">Export</div>
+            <div class="interface__btn grad clear" @click="$store.dispatch('clearAll')">Clear</div>
+          </div>
+          <div class="element-menu" v-if="$store.state.elementMenu &amp;&amp; $store.state.selectedElement" key="two">
+            <div class="interface__input table-number">Table number</div>
+            <div class="interface__input table-guests">Number of guests</div>
+            <div class="interface__btn grey rotate-left">Rotate left</div>
+            <div class="interface__btn grey rotate-right">Rotate right</div>
+            <div class="interface__btn grey copy-element" @click="$store.dispatch('copyElement')">Copy</div>
+            <div class="interface__btn grey remove-element" @click="$store.dispatch('removeElement')">Remove</div>
+          </div>
+        </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?7de3c1ab58ecb405adb9"></script></body>
+  <script type="text/javascript" src="js/index.js?e1d16f47ae8dafad5dfa"></script></body>
 </html>

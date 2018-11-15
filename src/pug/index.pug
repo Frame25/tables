@@ -7,15 +7,21 @@ html(lang="en")
   body
     #app
       #drawing
-      .navs
-        .btn.grad.add-table Add table
-        .btn.grad.add-text Add text
-        .btn.grad.add-line Add wall
-        .btn.grad.add-bar Add bar
-        .btn.grad.add-window Add windows
-        .btn.grad.add-decor Add decor
-        .btn.grad.export Export
-        .btn.grad.clear Clear
-      .block-menu
-        .btn.grey.copy-element Copy
-        .btn.grey.remove-element Remove
+      #interface
+        transition-group(name="fade")
+          .editor-menu(v-if="$store.state.editorMenu" key="one")
+            .interface__btn.grad.add-table(@click="$store.dispatch('addTable')") Add table
+            .interface__btn.grad.add-text(@click="$store.dispatch('addText')") Add text
+            .interface__btn.grad.add-line(@click="$store.dispatch('addLine')") Add wall
+            .interface__btn.grad.add-bar(@click="$store.dispatch('addLine2')") Add bar
+            .interface__btn.grad.add-window(@click="$store.dispatch('addGlass')") Add windows
+            .interface__btn.grad.add-decor(@click="$store.dispatch('addDecor')") Add decor
+            .interface__btn.grad.export(@click="$store.dispatch('exportData')") Export
+            .interface__btn.grad.clear(@click="$store.dispatch('clearAll')") Clear
+          .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
+            .interface__input.table-number Table number
+            .interface__input.table-guests Number of guests
+            .interface__btn.grey.rotate-left Rotate left
+            .interface__btn.grey.rotate-right Rotate right
+            .interface__btn.grey.copy-element(@click="$store.dispatch('copyElement')") Copy
+            .interface__btn.grey.remove-element(@click="$store.dispatch('removeElement')") Remove
