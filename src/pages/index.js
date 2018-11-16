@@ -18,8 +18,15 @@ store.state.d.click(() => {
 new Vue({
   el: '#interface',
   store,
-  data: {},
-  methods: {},
+  data: {
+    inputText: ''
+  },
+  methods: {
+    inputSend (val) {
+      this.inputText = this.inputText.replace(/\D+/g, '').slice(0,2)
+      this.$store.dispatch('changeText', this.inputText)
+    }
+  },
   mounted () {
     this.$store.subscribe((mutation, state) => {
       this.$forceUpdate()

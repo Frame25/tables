@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?3faf7a9374f484566937" rel="stylesheet"></head>
+  <link href="css/index.css?d7289a9f3c123a642c1e" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
       <div id="interface">
-        <transition-group name="fade">
+        <transition-group name="fade-up">
           <div class="editor-menu" v-if="$store.state.editorMenu" key="one">
             <div class="interface__btn add-table" @click="$store.dispatch('addTable')"> 
               <div class="btn__icon icon-table">
@@ -53,11 +53,14 @@
             </div>
           </div>
           <div class="element-menu" v-if="$store.state.elementMenu &amp;&amp; $store.state.selectedElement" key="two">
-            <div class="interface__btn rotate-left">
+            <div class="interface__input table-number"> <span>Table number</span>
+              <input v-model="inputText" value="$store.selectedElementText" @input="inputSend">
+            </div>
+            <div class="interface__btn rotate-left" @click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'">
               <div class="btn__icon icon-rotate"></div>
               <div class="btn__text">Rotate left</div>
             </div>
-            <div class="interface__btn rotate-right">
+            <div class="interface__btn rotate-right" @click="$store.dispatch('rotateElement')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'">
               <div class="btn__icon icon-rotate right"></div>
               <div class="btn__text">Rotate right</div>
             </div>
@@ -73,5 +76,5 @@
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?3faf7a9374f484566937"></script></body>
+  <script type="text/javascript" src="js/index.js?d7289a9f3c123a642c1e"></script></body>
 </html>

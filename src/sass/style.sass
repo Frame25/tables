@@ -32,6 +32,9 @@ div
       > tspan
         outline: $blue solid 2px
 
+    image.selected-element
+      outline: $blue solid 2px
+
   .editor-menu
     background: $menu-bg
     padding: 10px 30px
@@ -40,6 +43,7 @@ div
     bottom: 0
     left: 0
     right: 0
+    overflow: scroll
 
   .interface__btn
     display: inline-block
@@ -47,6 +51,7 @@ div
     cursor: pointer
     user-select: none
     border-radius: 2px
+    flex-shrink: 0
 
     .btn__icon
       width: 66px
@@ -114,8 +119,15 @@ div
     background: $menu-bg
     display: flex
     padding: 10px 30px
+    overflow: scroll
 
 .fade-enter-active, .fade-leave-active
   +transition()
 .fade-enter, .fade-leave-to
   opacity: 0
+
+.fade-up-enter-active, .fade-up-leave-active
+  +transition()
+.fade-up-enter, .fade-up-leave-to
+  opacity: 0
+  transform: translateY(-30px)

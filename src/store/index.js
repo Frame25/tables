@@ -21,6 +21,7 @@ const store = new Vuex.Store({
   state: {
     d: SVG('drawing').size('100%', '100%').viewbox(0, 0, 1024, 768),
     selectedElement: null,
+    selectedElementText: null,
     editorMenu: true,
     elementMenu: false,
     tableCount: 1,
@@ -30,8 +31,8 @@ const store = new Vuex.Store({
       dragOptions: {snapToGrid: 11},
       dragOptions2: {snapToGrid: 22},
       resizeOptions: {snapToGrid: 11, snapToAngle: 45},
-      startPos: [22, 22],
-      lineStartDots: [ [22, 22], [132, 22] ],
+      startPos: [132, 132],
+      lineStartDots: [ [132, 132], [244, 132] ],
       table: {
         width: 66,
         height: 66,
@@ -87,6 +88,9 @@ const store = new Vuex.Store({
     },
     setElementMenu (state, val) {
       state.elementMenu = val
+      if (state.selectedElement && state.selectedElement.select('text').length()) {
+        state.selectedElementText = state.selectedElement.select('text').first().text()
+      }
     },
     increaseTable (state, minus) {
       if (minus)
@@ -105,33 +109,27 @@ const store = new Vuex.Store({
     },
 
     // ----------- ELEMENTS` ACTIONS ->
-    registerSelectElement ({ state, dispatch, commit }, elem) {
+    registerSelectElement ({ dispatch }, elem) {
       elem.click(event => {
         event.stopPropagation()
-        dispatch('unselectAll')
-        commit('setSelectedEl', elem)
-        if (elem.hasClass('table')) elem.draggable(state.defs.dragOptions2) 
-        else elem.draggable(state.defs.dragOptions)
-        if (elem.type === 'line')
-          elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
-        else
-          elem.addClass(state.defs.selectClass)
-        commit('setElementMenu', true)
-        commit('setEditorMenu', false)
+        dispatch('selectElement', elem)
       })
       elem.touchstart(event => {
         event.stopPropagation()
-        dispatch('unselectAll')
-        commit('setSelectedEl', elem)
-        if (elem.hasClass('table')) elem.draggable(state.defs.dragOptions2) 
-        else elem.draggable(state.defs.dragOptions)
-        if (elem.type === 'line')
-          elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
-        else
-          elem.addClass(state.defs.selectClass)
-        commit('setElementMenu', true)
-        commit('setEditorMenu', false)
+        dispatch('selectElement', elem)
       })
+    },
+    selectElement ({ state, dispatch, commit }, elem) {
+      dispatch('unselectAll')
+      commit('setSelectedEl', elem)
+      if (elem.attr().restotype === 'table') elem.draggable(state.defs.dragOptions2) 
+      else elem.draggable(state.defs.dragOptions)
+      if (elem.type === 'line')
+        elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
+      else
+        elem.addClass(state.defs.selectClass)
+      commit('setElementMenu', true)
+      commit('setEditorMenu', false)
     },
     unselectAll ({ state, commit }) {
       commit('setSelectedEl', null)
@@ -144,10 +142,15 @@ const store = new Vuex.Store({
     },
     copyElement ({ state, dispatch, commit }) {
       if (state.selectedElement) {
-        if (state.hasClass('table')) commit('increaseTable')
         let elNew = state.selectedElement.clone()
         elNew.draggable(state.defs.dragOptions).dmove(44, 44)
         dispatch('registerSelectElement', elNew)
+        dispatch('unselectAll')
+        dispatch('selectElement', elNew)
+        if (elNew.attr().restotype === 'table') {
+          dispatch('changeText', String(state.tableCount))
+          commit('increaseTable')
+        }
       }
     },
     removeElement({ state, dispatch }) {
@@ -163,6 +166,16 @@ const store = new Vuex.Store({
       state.d.clear()
       dispatch('fillWithPattern')
     },
+    rotateElement ({ state }, left) {
+      let rotate = state.selectedElement.transform().rotation
+      left ? rotate -= 90 : rotate += 90
+      state.selectedElement.transform({ rotation: rotate })
+    },
+    changeText ({ state }, text) {
+      if (state.selectedElement && state.selectedElement.select('text').length()) {
+        state.selectedElement.select('text').first().text(text)
+      }
+    },
 
     // ----------- CREATION ACTIONS ->
     addTable ({ state, dispatch, commit }) {
@@ -174,7 +187,7 @@ const store = new Vuex.Store({
       .fill(state.defs.table.fill)
       .radius(state.defs.table.radius)
     
-      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions2).addClass('table')
+      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions2).addClass('table').attr('restotype', 'table')
     
       commit('increaseTable')
 
@@ -183,26 +196,26 @@ const store = new Vuex.Store({
     addText ({ state, dispatch }) {
       let text = 'Text'
       let textBlock = state.d.text(text)
-      .draggable(state.defs.dragOptions2)
+      .draggable(state.defs.dragOptions)
       .font(state.defs.text.font)
       .move(...state.defs.startPos)
 
       dispatch('registerSelectElement', textBlock)
     },
     addLine ({ state, dispatch }) {
-      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.line.stroke).draggable(state.defs.dragOptions)
+      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.line.stroke).draggable(state.defs.dragOptions).attr('restotype', 'wall')
       dispatch('registerSelectElement', line)
     },
     addLine2 ({ state, dispatch }) {
-      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.line2.stroke).draggable(state.defs.dragOptions)
+      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.line2.stroke).draggable(state.defs.dragOptions).attr('restotype', 'bar')
       dispatch('registerSelectElement', line)
     },
     addGlass ({ state, dispatch }) {
-      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.glass.stroke).draggable(state.defs.dragOptions)
+      let line = state.d.line(state.defs.lineStartDots).stroke(state.defs.glass.stroke).draggable(state.defs.dragOptions).attr('restotype', 'window')
       dispatch('registerSelectElement', line)
     },
     addDecor ({ state, dispatch }) {
-      let decor = state.d.image('img/decor.svg').draggable(state.defs.dragOptions).move(...state.defs.startPos)
+      let decor = state.d.image('img/decor.svg').draggable(state.defs.dragOptions).move(...state.defs.startPos).attr('restotype', 'decor')
       dispatch('registerSelectElement', decor)
     },
 

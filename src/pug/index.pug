@@ -8,7 +8,7 @@ html(lang="en")
     #app
       #drawing
       #interface
-        transition-group(name="fade")
+        transition-group(name="fade-up")
           .editor-menu(v-if="$store.state.editorMenu" key="one")
             .interface__btn.add-table(@click="$store.dispatch('addTable')") 
               .btn__icon.icon-table
@@ -39,12 +39,14 @@ html(lang="en")
               .btn__icon.icon-text C
               .btn__text Clear
           .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
-            //- .interface__input.table-number Table number
+            .interface__input.table-number 
+              span Table number
+              input(v-model="inputText" value="$store.selectedElementText" @input="inputSend")
             //- .interface__input.table-guests Number of guests
-            .interface__btn.rotate-left
+            .interface__btn.rotate-left(@click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'")
               .btn__icon.icon-rotate
               .btn__text Rotate left
-            .interface__btn.rotate-right
+            .interface__btn.rotate-right(@click="$store.dispatch('rotateElement')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'")
               .btn__icon.icon-rotate.right
               .btn__text Rotate right
             .interface__btn.copy-element(@click="$store.dispatch('copyElement')")
