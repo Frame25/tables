@@ -27,7 +27,7 @@ const store = new Vuex.Store({
     defs: {
       selectOptionsLine: {pointSize: 22, rotationPoint: false, deepSelect: true},
       selectClass: 'selected-element',
-      dragOptions: {snapToGrid: 22},
+      dragOptions: {snapToGrid: 11},
       resizeOptions: {snapToGrid: 22, snapToAngle: 45},
       startPos: [22, 22],
       lineStartDots: [ [22, 22], [132, 22] ],
@@ -199,7 +199,7 @@ const store = new Vuex.Store({
       dispatch('registerSelectElement', line)
     },
     addDecor ({ state, dispatch }) {
-      let decor = state.d.image('img/decor.svg').draggable({snapToGrid: 11}).move(...state.defs.startPos)
+      let decor = state.d.image('img/decor.svg').draggable(state.defs.dragOptions).move(...state.defs.startPos)
       dispatch('registerSelectElement', decor)
     },
 
