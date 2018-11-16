@@ -172,7 +172,7 @@ const store = new Vuex.Store({
       .fill(state.defs.table.fill)
       .radius(state.defs.table.radius)
     
-      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions)
+      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions2)
     
       commit('increaseTable')
 
@@ -181,7 +181,7 @@ const store = new Vuex.Store({
     addText ({ state, dispatch }) {
       let text = 'Text'
       let textBlock = state.d.text(text)
-      .draggable(state.defs.dragOptions)
+      .draggable(state.defs.dragOptions2)
       .font(state.defs.text.font)
       .move(...state.defs.startPos)
 
