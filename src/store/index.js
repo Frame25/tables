@@ -110,7 +110,7 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.type === 'g' ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
+        elem.hasClass('table') ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
@@ -122,7 +122,7 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.type === 'g' ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
+        elem.hasClass('table') ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
@@ -172,7 +172,7 @@ const store = new Vuex.Store({
       .fill(state.defs.table.fill)
       .radius(state.defs.table.radius)
     
-      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions2)
+      group.add(table).add(num).move(...state.defs.startPos).draggable(state.defs.dragOptions2).addClass('table')
     
       commit('increaseTable')
 
