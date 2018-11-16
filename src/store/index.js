@@ -199,7 +199,7 @@ const store = new Vuex.Store({
       dispatch('registerSelectElement', line)
     },
     addDecor ({ state, dispatch }) {
-      let decor = state.d.image('img/decor.svg').draggable(state.defs.dragOptions).move(...state.defs.startPos)
+      let decor = state.d.image('img/decor.svg').draggable({snapToGrid: 11}).move(...state.defs.startPos)
       dispatch('registerSelectElement', decor)
     },
 
