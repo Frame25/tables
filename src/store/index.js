@@ -144,7 +144,7 @@ const store = new Vuex.Store({
     },
     copyElement ({ state, dispatch, commit }) {
       if (state.selectedElement) {
-        if (state.selectedElement.type === 'g') commit('increaseTable')
+        if (state.hasClass('table')) commit('increaseTable')
         let elNew = state.selectedElement.clone()
         elNew.draggable(state.defs.dragOptions).dmove(44, 44)
         dispatch('registerSelectElement', elNew)
