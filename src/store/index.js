@@ -29,7 +29,7 @@ const store = new Vuex.Store({
       selectClass: 'selected-element',
       dragOptions: {snapToGrid: 11},
       dragOptions2: {snapToGrid: 22},
-      resizeOptions: {snapToGrid: 22, snapToAngle: 45},
+      resizeOptions: {snapToGrid: 11, snapToAngle: 45},
       startPos: [22, 22],
       lineStartDots: [ [22, 22], [132, 22] ],
       table: {
@@ -110,7 +110,8 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.hasClass('table') ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
+        if (elem.hasClass('table')) elem.draggable(state.defs.dragOptions2) 
+        else elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
@@ -122,7 +123,8 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.hasClass('table') ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
+        if (elem.hasClass('table')) elem.draggable(state.defs.dragOptions2) 
+        else elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
