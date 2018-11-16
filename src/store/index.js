@@ -27,7 +27,8 @@ const store = new Vuex.Store({
     defs: {
       selectOptionsLine: {pointSize: 22, rotationPoint: false, deepSelect: true},
       selectClass: 'selected-element',
-      dragOptions: {snapToGrid: 22},
+      dragOptions: {snapToGrid: 11},
+      dragOptions2: {snapToGrid: 22},
       resizeOptions: {snapToGrid: 22, snapToAngle: 45},
       startPos: [22, 22],
       lineStartDots: [ [22, 22], [132, 22] ],
@@ -109,7 +110,7 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.draggable(state.defs.dragOptions)
+        elem.type === 'g' ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
@@ -121,7 +122,7 @@ const store = new Vuex.Store({
         event.stopPropagation()
         dispatch('unselectAll')
         commit('setSelectedEl', elem)
-        elem.draggable(state.defs.dragOptions)
+        elem.type === 'g' ? elem.draggable(state.defs.dragOptions2) : elem.draggable(state.defs.dragOptions)
         if (elem.type === 'line')
           elem.selectize(state.defs.selectOptionsLine).resize(state.defs.resizeOptions)
         else
@@ -141,7 +142,7 @@ const store = new Vuex.Store({
     },
     copyElement ({ state, dispatch, commit }) {
       if (state.selectedElement) {
-        if (state.selectedElement.type === 'rect') commit('increaseTable')
+        if (state.selectedElement.type === 'g') commit('increaseTable')
         let elNew = state.selectedElement.clone()
         elNew.draggable(state.defs.dragOptions).dmove(44, 44)
         dispatch('registerSelectElement', elNew)
