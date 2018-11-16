@@ -27,7 +27,7 @@ const store = new Vuex.Store({
     defs: {
       selectOptionsLine: {pointSize: 22, rotationPoint: false, deepSelect: true},
       selectClass: 'selected-element',
-      dragOptions: {snapToGrid: 11},
+      dragOptions: {snapToGrid: 22},
       resizeOptions: {snapToGrid: 22, snapToAngle: 45},
       startPos: [22, 22],
       lineStartDots: [ [22, 22], [132, 22] ],
