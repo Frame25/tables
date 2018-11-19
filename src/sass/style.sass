@@ -1,7 +1,9 @@
+@import fonts
 @import defaults
+
 body
   overflow: hidden
-  font-family: 'Helvetica', Arial, sans-serif
+  font-family: $SF
 
 div
   box-sizing: border-box
@@ -58,6 +60,11 @@ div
       height: 66px
       padding: 20px
       border-radius: 8px
+      &.big
+        width: 88px
+        &.icon-table
+          background-position-x: 58px
+
 
       &.icon-rotate
         background: white url('../img/rotate.png') center no-repeat

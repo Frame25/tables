@@ -9,30 +9,32 @@ import store from '../store/index'
 // ------------------------------------------
 store.dispatch('fillWithPattern')
 store.state.d.click(() => {
-  store.dispatch('unselectAll')
+    store.dispatch('unselectAll')
 })
+
+store.dispatch('addTable', 6)
 
 // ------------------------------------------
 // ACTIONS INTERFACE
 // ------------------------------------------
 new Vue({
-  el: '#interface',
-  store,
-  data: {
-    inputText: ''
-  },
-  methods: {
-    inputSend (val) {
-      this.inputText = this.inputText.replace(/\D+/g, '').slice(0,2)
-      this.$store.dispatch('changeText', this.inputText)
+    el: '#interface',
+    store,
+    data: {
+        inputText: ''
+    },
+    methods: {
+        inputSend (val) {
+            this.inputText = this.inputText.replace(/\D+/g, '').slice(0,2)
+            this.$store.dispatch('changeText', this.inputText)
+        }
+    },
+    mounted () {
+        this.$store.subscribe((mutation, state) => {
+            this.$forceUpdate()
+        })
+        this.$store.subscribeAction((action, state) => {
+            this.$forceUpdate()
+        })
     }
-  },
-  mounted () {
-    this.$store.subscribe((mutation, state) => {
-      this.$forceUpdate()
-    })
-    this.$store.subscribeAction((action, state) => {
-      this.$forceUpdate()
-    })
-  }
 })

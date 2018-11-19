@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9">
+    <g id="sofaWhite" fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width=".5">
+        <path d="M3.12.25a.25.25 0 0 0-.25.25v7.409c0 .138.112.25.25.25h10.13a.25.25 0 0 0 .25-.25V.5a.25.25 0 0 0-.25-.25H3.12z"/>
+        <path d="M3.12 4.557a.25.25 0 0 0-.25.25v3.205c0 .138.112.25.25.25h10.13a.25.25 0 0 0 .25-.25V4.807a.25.25 0 0 0-.25-.25H3.12z"/>
+        <rect width="5.065" height="2.303" x="12.064" y="4.557" rx=".5" transform="rotate(90 14.596 5.709)"/>
+        <rect width="5.065" height="2.303" x="-.804" y="4.557" rx=".5" transform="rotate(90 1.729 5.709)"/>
+    </g>
+</svg>
