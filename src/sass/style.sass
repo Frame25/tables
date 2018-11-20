@@ -39,7 +39,7 @@ div
 
   .editor-menu
     background: $menu-bg
-    padding: 10px 30px
+    padding: 22px 30px
     display: flex
     position: fixed
     bottom: 0
@@ -47,9 +47,44 @@ div
     right: 0
     overflow: scroll
 
+  .element-menu
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    background: $menu-bg
+    display: flex
+    padding: 22px 30px
+    overflow: scroll
+    align-items: center
+
+  .interface__input
+    margin-top: -16px
+    margin-right: 32px
+
+    &.wide
+      input
+        width: 150px
+
+    span
+      margin-right: 8px
+
+    input
+      width: 66px
+      height: 66px
+      border: none
+      border-radius: 8px
+      padding: 0
+      font-size: 40px
+      display: inline-block
+      vertical-align: middle
+      font-family: $SFD
+      font-weight: 200
+      text-align: center
+
   .interface__btn
     display: inline-block
-    padding: 11px 16px
+    margin-right: 32px
     cursor: pointer
     user-select: none
     border-radius: 2px
@@ -63,7 +98,7 @@ div
       &.big
         width: 88px
         &.icon-table
-          background-position-x: 58px
+          background-position-x: 52px
 
 
       &.icon-rotate
@@ -81,15 +116,16 @@ div
         background: white url('../img/decor.svg') center no-repeat
         background-size: 44px
       &.icon-table
-        background: white url('../img/sofa.png') 38px 10px no-repeat
-        background-size: 15px
+        background: white url('../img/sofa.png') 30px 12px no-repeat
+        background-size: 16px
         position: relative
         .table-guest
           position: absolute
-          top: 4px
-          right: 4px
+          top: 7px
+          right: 7px
           font-weight: 200
           font-size: 17px
+          font-family: $SFD
       &.icon-text
         background: white
         text-align: center
@@ -117,16 +153,6 @@ div
       font-weight: 300
       margin-top: 5px
       font-size: 10px
-
-  .element-menu
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
-    background: $menu-bg
-    display: flex
-    padding: 10px 30px
-    overflow: scroll
 
 .fade-enter-active, .fade-leave-active
   +transition()

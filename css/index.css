@@ -484,7 +484,7 @@ div {
       outline: #96d9fa solid 2px; }
   #app .editor-menu {
     background: #edf1f2;
-    padding: 10px 30px;
+    padding: 22px 30px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -493,9 +493,42 @@ div {
     left: 0;
     right: 0;
     overflow: scroll; }
+  #app .element-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #edf1f2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 22px 30px;
+    overflow: scroll;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  #app .interface__input {
+    margin-top: -16px;
+    margin-right: 32px; }
+    #app .interface__input.wide input {
+      width: 150px; }
+    #app .interface__input span {
+      margin-right: 8px; }
+    #app .interface__input input {
+      width: 66px;
+      height: 66px;
+      border: none;
+      border-radius: 8px;
+      padding: 0;
+      font-size: 40px;
+      display: inline-block;
+      vertical-align: middle;
+      font-family: SFD, Helvetica, Arial, sans-serif;
+      font-weight: 200;
+      text-align: center; }
   #app .interface__btn {
     display: inline-block;
-    padding: 11px 16px;
+    margin-right: 32px;
     cursor: pointer;
     -webkit-user-select: none;
        -moz-user-select: none;
@@ -512,7 +545,7 @@ div {
       #app .interface__btn .btn__icon.big {
         width: 88px; }
         #app .interface__btn .btn__icon.big.icon-table {
-          background-position-x: 58px; }
+          background-position-x: 52px; }
       #app .interface__btn .btn__icon.icon-rotate {
         background: white url("../img/rotate.png") center no-repeat;
         background-size: 30px; }
@@ -530,15 +563,16 @@ div {
         background: white url("../img/decor.svg") center no-repeat;
         background-size: 44px; }
       #app .interface__btn .btn__icon.icon-table {
-        background: white url("../img/sofa.png") 38px 10px no-repeat;
-        background-size: 15px;
+        background: white url("../img/sofa.png") 30px 12px no-repeat;
+        background-size: 16px;
         position: relative; }
         #app .interface__btn .btn__icon.icon-table .table-guest {
           position: absolute;
-          top: 4px;
-          right: 4px;
+          top: 7px;
+          right: 7px;
           font-weight: 200;
-          font-size: 17px; }
+          font-size: 17px;
+          font-family: SFD, Helvetica, Arial, sans-serif; }
       #app .interface__btn .btn__icon.icon-text {
         background: white;
         text-align: center;
@@ -565,17 +599,6 @@ div {
       font-weight: 300;
       margin-top: 5px;
       font-size: 10px; }
-  #app .element-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #edf1f2;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 10px 30px;
-    overflow: scroll; }
 
 .fade-enter-active, .fade-leave-active {
   -webkit-transition-property: all;

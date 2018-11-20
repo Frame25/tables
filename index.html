@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?4cd2ae7b816d359927ab" rel="stylesheet"></head>
+  <link href="css/index.css?2bddb4de3d314b6ada57" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
@@ -17,13 +17,13 @@
               </div>
               <div class="btn__text">Add table</div>
             </div>
-            <div class="interface__btn add-table" @click="$store.dispatch('addTable', 4)">
+            <div class="interface__btn add-table" @click="$store.dispatch('addTable', {guests: 4})">
               <div class="btn__icon icon-table big">
                 <div class="table-guest">4</div>
               </div>
               <div class="btn__text">Add table 4</div>
             </div>
-            <div class="interface__btn add-table" @click="$store.dispatch('addTable', 6)">
+            <div class="interface__btn add-table" @click="$store.dispatch('addTable', {guests: 6})">
               <div class="btn__icon icon-table big">
                 <div class="table-guest">6</div>
               </div>
@@ -33,13 +33,13 @@
               <div class="btn__icon icon-text">T</div>
               <div class="btn__text">Add text</div>
             </div>
-            <div class="interface__btn add-line" @click="$store.dispatch('addLine')">
+            <div class="interface__btn add-line" @click="$store.dispatch('addWall')">
               <div class="btn__icon icon-line">
                 <div class="line grey"></div>
               </div>
               <div class="btn__text">Add wall</div>
             </div>
-            <div class="interface__btn add-bar" @click="$store.dispatch('addLine2')">
+            <div class="interface__btn add-bar" @click="$store.dispatch('addBar')">
               <div class="btn__icon icon-line">
                 <div class="line brown"></div>
               </div>
@@ -65,8 +65,14 @@
             </div>
           </div>
           <div class="element-menu" v-if="$store.state.elementMenu &amp;&amp; $store.state.selectedElement" key="two">
-            <div class="interface__input table-number"><span>Table number</span>
-              <input v-model="inputText" value="$store.selectedElementText" @input="inputSend">
+            <div class="interface__input table-number" v-if="$store.state.selectedElement.attr('restotype') === 'table'"><span>Table number</span>
+              <input v-model="tableNum" value="" @input="tableNumSend">
+            </div>
+            <div class="interface__input table-number wide" v-if="$store.state.selectedElement.type ==='text'"><span>Text</span>
+              <input v-model="elementText" value="" @input="elementTextSend">
+            </div>
+            <div class="interface__input table-guests" v-if="$store.state.selectedElement.attr('restotype') === 'table'"><span>Number of guests</span>
+              <input v-model="guestNum" value="" @input="guestNumSend">
             </div>
             <div class="interface__btn rotate-left" @click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'">
               <div class="btn__icon icon-rotate"></div>
@@ -88,5 +94,5 @@
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?4cd2ae7b816d359927ab"></script></body>
+  <script type="text/javascript" src="js/index.js?2bddb4de3d314b6ada57"></script></body>
 </html>

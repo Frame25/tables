@@ -12,7 +12,11 @@ store.state.d.click(() => {
     store.dispatch('unselectAll')
 })
 
-store.dispatch('addTable', 6)
+store.dispatch('addTable', {guests: 6, number: 33, position: [300, 200]})
+store.dispatch('addTable', {guests: 2, position: [300, 300]})
+store.dispatch('addTable')
+
+window.D = store.state.d
 
 // ------------------------------------------
 // ACTIONS INTERFACE
@@ -21,15 +25,25 @@ new Vue({
     el: '#interface',
     store,
     data: {
-        inputText: ''
+        elementText: '',
+        tableNum: '',
+        guestNum: ''
     },
     methods: {
-        inputSend (val) {
-            this.inputText = this.inputText.replace(/\D+/g, '').slice(0,2)
-            this.$store.dispatch('changeText', this.inputText)
+        elementTextSend (val) {
+            this.$store.dispatch('changeText', this.elementText)
+        },
+        tableNumSend (val) {
+            this.tableNum = this.tableNum.replace(/\D+/g, '').slice(0,2)
+            this.$store.dispatch('changeText', this.tableNum)
+        },
+        guestNumSend (val) {
+            this.guestNum = this.guestNum.replace(/\D+/g, '').slice(0,1)
+            this.$store.dispatch('changeGuestNum', this.guestNum)
         }
     },
     mounted () {
+        
         this.$store.subscribe((mutation, state) => {
             this.$forceUpdate()
         })
