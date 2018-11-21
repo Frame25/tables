@@ -546,6 +546,8 @@ div {
         width: 88px; }
         #app .interface__btn .btn__icon.big.icon-table {
           background-position-x: 52px; }
+        #app .interface__btn .btn__icon.big.icon-decor2 {
+          background-size: 66px; }
       #app .interface__btn .btn__icon.icon-rotate {
         background: white url("../img/rotate.png") center no-repeat;
         background-size: 30px; }
@@ -561,6 +563,12 @@ div {
         background-size: 30px; }
       #app .interface__btn .btn__icon.icon-decor {
         background: white url("../img/decor.svg") center no-repeat;
+        background-size: 44px; }
+      #app .interface__btn .btn__icon.icon-barnchair {
+        background: white url("../img/barnchair.svg") center no-repeat;
+        background-size: 44px; }
+      #app .interface__btn .btn__icon.icon-decor2 {
+        background: white url("../img/decor2.svg") center no-repeat;
         background-size: 44px; }
       #app .interface__btn .btn__icon.icon-table {
         background: white url("../img/sofa.png") 30px 12px no-repeat;

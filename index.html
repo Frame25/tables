@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?1c1b598e576d73bf5b0f" rel="stylesheet"></head>
+  <link href="css/index.css?e327867fa57e6af67ac4" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
@@ -39,21 +39,29 @@
               </div>
               <div class="btn__text">Add wall</div>
             </div>
-            <div class="interface__btn add-bar" @click="$store.dispatch('addBar')">
-              <div class="btn__icon icon-line">
-                <div class="line brown"></div>
-              </div>
-              <div class="btn__text">Add bar</div>
-            </div>
             <div class="interface__btn add-window" @click="$store.dispatch('addGlass')">
               <div class="btn__icon icon-line">
                 <div class="line blue"></div>
               </div>
               <div class="btn__text">Add windows</div>
             </div>
+            <div class="interface__btn add-bar" @click="$store.dispatch('addBar')">
+              <div class="btn__icon icon-line">
+                <div class="line brown"></div>
+              </div>
+              <div class="btn__text">Add bar</div>
+            </div>
+            <div class="interface__btn add-barnchair" @click="$store.dispatch('addBarnchair')">
+              <div class="btn__icon icon-barnchair"></div>
+              <div class="btn__text">Add barnchair</div>
+            </div>
             <div class="interface__btn add-decor" @click="$store.dispatch('addDecor')">
               <div class="btn__icon icon-decor"></div>
               <div class="btn__text">Add decor</div>
+            </div>
+            <div class="interface__btn add-decor2" @click="$store.dispatch('addDecor2')">
+              <div class="btn__icon icon-decor2 big"></div>
+              <div class="btn__text">Add decor 2</div>
             </div>
             <div class="interface__btn export" @click="$store.dispatch('exportData')">
               <div class="btn__icon icon-text">E</div>
@@ -94,5 +102,5 @@
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?1c1b598e576d73bf5b0f"></script></body>
+  <script type="text/javascript" src="js/index.js?e327867fa57e6af67ac4"></script></body>
 </html>

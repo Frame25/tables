@@ -29,17 +29,23 @@ html(lang="en")
               .btn__icon.icon-line
                 .line.grey
               .btn__text Add wall
-            .interface__btn.add-bar(@click="$store.dispatch('addBar')")
-              .btn__icon.icon-line
-                .line.brown
-              .btn__text Add bar
             .interface__btn.add-window(@click="$store.dispatch('addGlass')")
               .btn__icon.icon-line
                 .line.blue
               .btn__text Add windows
+            .interface__btn.add-bar(@click="$store.dispatch('addBar')")
+              .btn__icon.icon-line
+                .line.brown
+              .btn__text Add bar
+            .interface__btn.add-barnchair(@click="$store.dispatch('addBarnchair')")
+              .btn__icon.icon-barnchair
+              .btn__text Add barnchair
             .interface__btn.add-decor(@click="$store.dispatch('addDecor')")
               .btn__icon.icon-decor
               .btn__text Add decor
+            .interface__btn.add-decor2(@click="$store.dispatch('addDecor2')")
+              .btn__icon.icon-decor2.big
+              .btn__text Add decor 2
             .interface__btn.export(@click="$store.dispatch('exportData')")
               .btn__icon.icon-text E
               .btn__text Export

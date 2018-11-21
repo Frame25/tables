@@ -51,6 +51,17 @@ if (lastMap) {
                         position: [el.x, el.y]
                     })
                     break
+                case 'decor2':
+                    store.dispatch('addDecor2', {
+                        position: [el.x, el.y]
+                    })
+                    break
+                case 'barnchair':
+                    store.dispatch('addBarnchair', {
+                        position: [el.x, el.y]
+                    })
+                    break
+
             }
         })
     }

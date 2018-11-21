@@ -249,9 +249,28 @@ const store = new Vuex.Store({
             let glass = state.d.line(dots || defs.lineStartDots).stroke(defs.glassStroke).draggable(defs.dragOptions).attr('restotype', 'window')
             dispatch('registerSelectElement', glass)
         },
+        addBarnchair ({ state, dispatch }, { position = null } = {}) {
+            // params: { position: Array(x, y) }
+            let decor = state.d.image('img/barnchair.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'barnchair')
+            dispatch('registerSelectElement', decor)
+        },
         addDecor ({ state, dispatch }, { position = null } = {}) {
             // params: { position: Array(x, y) }
             let decor = state.d.image('img/decor.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'decor')
+            dispatch('registerSelectElement', decor)
+        },
+        addDecor2 ({ state, dispatch }, { position = null } = {}) {
+            // params: { position: Array(x, y) }
+            let decor = state.d.image('img/decor2.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'decor2')
+            dispatch('registerSelectElement', decor)
+        },
+        addDecorMulti ({ state, dispatch }, { position = null, type = 'decor' } = {}) {
+            // params: { position: Array(x, y) }
+            if (type !== 'decor' && type !== 'decor2' && type !== 'barnchair') {
+                console.log('unregistered type of decor')
+                return false
+            }
+            let decor = state.d.image('img/' + type + '.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', type)
             dispatch('registerSelectElement', decor)
         },
 
@@ -313,6 +332,21 @@ const store = new Vuex.Store({
                             y: this.y()
                         })
                         break
+                    case 'decor2':
+                        expData.elements.push({
+                            type,
+                            x: this.x(),
+                            y: this.y()
+                        })
+                        break
+                    case 'barnchair':
+                        expData.elements.push({
+                            type,
+                            x: this.x(),
+                            y: this.y()
+                        })
+                        break
+
                 }
             })
             window.localStorage.setItem('restoclub_last_map', JSON.stringify(expData))
