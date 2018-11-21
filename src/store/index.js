@@ -315,6 +315,7 @@ const store = new Vuex.Store({
                         break
                 }
             })
+            window.localStorage.setItem('restoclub_last_map', JSON.stringify(expData))
             console.log(expData)
             window.postMessage(JSON.stringify(expData))
         }

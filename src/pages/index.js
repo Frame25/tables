@@ -12,11 +12,49 @@ store.state.d.click(() => {
     store.dispatch('unselectAll')
 })
 
-store.dispatch('addTable', {guests: 6, number: 33, position: [300, 200]})
-store.dispatch('addTable', {guests: 2, position: [300, 300]})
-store.dispatch('addTable')
-
-window.D = store.state.d
+let lastMap = window.localStorage.getItem('restoclub_last_map')
+if (lastMap) {
+    let json = JSON.parse(lastMap)
+    if (json.elements && json.elements.length) {
+        json.elements.forEach(el => {
+            switch (el.type) {
+                case 'table':
+                    store.dispatch('addTable', {
+                        position: [el.x, el.y],
+                        number: el.number,
+                        guests: el.guests
+                    })
+                    break
+                case 'text':
+                    store.dispatch('addText', {
+                        text: el.text,
+                        position: [el.x, el.y],
+                    })
+                    break
+                case 'wall':
+                    store.dispatch('addWall', {
+                        dots: el.dots
+                    })
+                    break
+                case 'bar':
+                    store.dispatch('addBar', {
+                        dots: el.dots
+                    })
+                    break
+                case 'glass':
+                    store.dispatch('addGlass', {
+                        dots: el.dots
+                    })
+                    break
+                case 'decor':
+                    store.dispatch('addDecor', {
+                        position: [el.x, el.y]
+                    })
+                    break
+            }
+        })
+    }
+}
 
 // ------------------------------------------
 // ACTIONS INTERFACE
