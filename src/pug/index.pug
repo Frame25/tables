@@ -49,13 +49,13 @@ html(lang="en")
           .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
             .interface__input.table-number(v-if="$store.state.selectedElement.attr('restotype') === 'table'")
               span Table number
-              input(v-model="tableNum" value="" @input="tableNumSend")
+              input(v-model="tableNum" @input="tableNumSend")
             .interface__input.table-number.wide(v-if="$store.state.selectedElement.type ==='text'")
               span Text
-              input(v-model="elementText" value="" @input="elementTextSend")
+              input(v-model="elementText" @input="elementTextSend")
             .interface__input.table-guests(v-if="$store.state.selectedElement.attr('restotype') === 'table'")
               span Number of guests
-              input(v-model="guestNum" value="" @input="guestNumSend")
+              input(v-model="guestNum" @input="guestNumSend")
             .interface__btn.rotate-left(@click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'")
               .btn__icon.icon-rotate
               .btn__text Rotate left

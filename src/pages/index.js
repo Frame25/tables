@@ -84,6 +84,9 @@ new Vue({
         
         this.$store.subscribe((mutation, state) => {
             this.$forceUpdate()
+            this.elementText = this.$store.state.selectedElementText
+            this.tableNum = this.$store.state.selectedElementText
+            this.guestNum = this.$store.state.selectedElementGuests
         })
         this.$store.subscribeAction((action, state) => {
             this.$forceUpdate()

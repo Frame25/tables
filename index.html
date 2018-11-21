@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Tables</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href="css/index.css?e624c6e5c9363957ed48" rel="stylesheet"></head>
+  <link href="css/index.css?1c1b598e576d73bf5b0f" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
@@ -66,13 +66,13 @@
           </div>
           <div class="element-menu" v-if="$store.state.elementMenu &amp;&amp; $store.state.selectedElement" key="two">
             <div class="interface__input table-number" v-if="$store.state.selectedElement.attr('restotype') === 'table'"><span>Table number</span>
-              <input v-model="tableNum" value="" @input="tableNumSend">
+              <input v-model="tableNum" @input="tableNumSend">
             </div>
             <div class="interface__input table-number wide" v-if="$store.state.selectedElement.type ==='text'"><span>Text</span>
-              <input v-model="elementText" value="" @input="elementTextSend">
+              <input v-model="elementText" @input="elementTextSend">
             </div>
             <div class="interface__input table-guests" v-if="$store.state.selectedElement.attr('restotype') === 'table'"><span>Number of guests</span>
-              <input v-model="guestNum" value="" @input="guestNumSend">
+              <input v-model="guestNum" @input="guestNumSend">
             </div>
             <div class="interface__btn rotate-left" @click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'">
               <div class="btn__icon icon-rotate"></div>
@@ -94,5 +94,5 @@
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?e624c6e5c9363957ed48"></script></body>
+  <script type="text/javascript" src="js/index.js?1c1b598e576d73bf5b0f"></script></body>
 </html>
