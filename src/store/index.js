@@ -18,8 +18,8 @@ resize.call(this, SVG)
 // DEFAULTS
 // ------------------------------------------
 const defGrid = 22
-const defY = defGrid * 14
-const defX = defGrid * 19
+const defY = defGrid * 15
+const defX = defGrid * 22
 function xGrid (num = 14) {
     return defGrid * num
 }
@@ -30,7 +30,7 @@ const defs = {
     dragOptions2: {snapToGrid: defGrid},
     resizeOptions: {snapToGrid: xGrid(0.5), snapToAngle: 45},
     startPos: [defX, defY],
-    lineStartDots: [ [defX, defY], [xGrid(24), defY] ],
+    lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
     table: {
         width: xGrid(3),
         widthB: xGrid(4),
@@ -267,7 +267,7 @@ const store = new Vuex.Store({
         addDecorMulti ({ state, dispatch }, { position = null, type = 'decor' } = {}) {
             // params: { position: Array(x, y) }
             if (type !== 'decor' && type !== 'decor2' && type !== 'barnchair') {
-                console.log('unregistered type of decor')
+                throw new Error('unregistered type of decor')
                 return false
             }
             let decor = state.d.image('img/' + type + '.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', type)

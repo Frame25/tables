@@ -492,7 +492,10 @@ div {
     bottom: 0;
     left: 0;
     right: 0;
-    overflow: scroll; }
+    overflow: scroll;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
   #app .element-menu {
     position: fixed;
     bottom: 0;
@@ -506,7 +509,10 @@ div {
     overflow: scroll;
     -webkit-box-align: center;
         -ms-flex-align: center;
-            align-items: center; }
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
   #app .interface__input {
     margin-top: -16px;
     margin-right: 32px; }
