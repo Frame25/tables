@@ -135,6 +135,10 @@ const store = new Vuex.Store({
         selectElement ({ state, dispatch, commit }, elem) {
             dispatch('unselectAll')
             commit('setSelectedEl', elem)
+
+            if (elem.type === 'line') elem.selectize(defs.selectOptionsLine).resize(defs.resizeOptions)
+            else elem.addClass(defs.selectClass) //dispatch('drawOutline', elem)
+
             if (elem.attr().restotype === 'table') {
                 let txt = elem.select('.table-num').first().text()
                 let gst = elem.select('.guests-num').first().text()
@@ -147,13 +151,25 @@ const store = new Vuex.Store({
                 elem.draggable(defs.dragOptions)
             }
 
-            if (elem.type === 'line') elem.selectize(defs.selectOptionsLine).resize(defs.resizeOptions)
-            else elem.addClass(defs.selectClass)
-
             commit('setElementMenu', true)
             commit('setEditorMenu', false)
         },
-        unselectAll ({ state, commit }) {
+        // drawOutline ({ state }, el) {
+        //     if (el) {
+        //         let {
+        //             x = el.bbox().x,
+        //             y = el.bbox().y,
+        //             x2 = el.bbox().x2,
+        //             y2 = el.bbox().y2
+        //         } = {}
+        //         state.d.polyline([x,y, x,y2, x2,y2, x2,y, x,y]).addClass('element-outline').fill('none').stroke('#96d9fa')
+        //     }
+        // },
+        // deleteOutline({ state }) {
+        //     if (state.d.select('element-outline').length)
+        //         state.d.select('element-outline').first().remove()
+        // },
+        unselectAll ({ state, commit, dispatch }) {
             commit('setSelectedEl', null)
             commit('setElementMenu', false)
             commit('setEditorMenu', true)
@@ -161,6 +177,7 @@ const store = new Vuex.Store({
                 this.selectize(false, {deepSelect: true}).resize(false)
                 if (this.hasClass(defs.selectClass)) this.removeClass(defs.selectClass)
             })
+            // dispatch('deleteOutline')
         },
         copyElement ({ state, dispatch, commit }) {
             if (state.selectedElement) {
@@ -249,7 +266,7 @@ const store = new Vuex.Store({
         },
         addGlass ({ state, dispatch }, { dots = defs.lineStartDots } = {}) {
             // params: { dots: Array( Array(x, y), Array(x, y) ) }
-            let glass = state.d.line(dots).stroke(defs.glassStroke).draggable(defs.dragOptions).attr('restotype', 'window')
+            let glass = state.d.line(dots).stroke(defs.glassStroke).draggable(defs.dragOptions).attr('restotype', 'glass')
             dispatch('registerSelectElement', glass)
         },
         addBarnchair ({ state, dispatch }, { position = defs.startPos } = {}) {
@@ -327,7 +344,7 @@ const store = new Vuex.Store({
                             dots: this.array().value
                         })
                         break
-                    case 'window':
+                    case 'glass':
                         expData.elements.push({
                             type,
                             dots: this.array().value
@@ -360,6 +377,64 @@ const store = new Vuex.Store({
             window.localStorage.setItem('restoclub_last_map', JSON.stringify(expData))
             console.log(JSON.stringify(expData))
             window.postMessage(JSON.stringify(expData))
+        },
+
+        // ----------- IMPORT -->
+        importData (map) {
+            if (map) {
+                let json = typeof map === 'string' ? JSON.parse(map) : map
+                d.viewbox(0, 0, json.width, json.height)
+                if (json.elements && json.elements.length) {
+                    json.elements.forEach(el => {
+                        switch (el.type) {
+                            case 'table':
+                                addTable({
+                                    position: [el.x, el.y],
+                                    number: el.number,
+                                    guests: el.guests
+                                })
+                                break
+                            case 'text':
+                                addText({
+                                    text: el.text,
+                                    position: [el.x, el.y],
+                                })
+                                break
+                            case 'wall':
+                                addWall({
+                                    dots: el.dots
+                                })
+                                break
+                            case 'bar':
+                                addBar({
+                                    dots: el.dots
+                                })
+                                break
+                            case 'glass':
+                                addGlass({
+                                    dots: el.dots
+                                })
+                                break
+                            case 'decor':
+                                addDecor({
+                                    position: [el.x, el.y]
+                                })
+                                break
+                            case 'decor2':
+                                addDecor2({
+                                    position: [el.x, el.y]
+                                })
+                                break
+                            case 'barnchair':
+                                addBarnchair({
+                                    position: [el.x, el.y]
+                                })
+                                break
+
+                        }
+                    })
+                }
+            }
         }
     }
 })

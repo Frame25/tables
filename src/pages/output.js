@@ -135,7 +135,7 @@ function addBar ({ dots = defs.lineStartDots } = {}) {
 
 function addGlass ({ dots = defs.lineStartDots } = {}) {
     // params: { dots: Array( Array(x, y), Array(x, y) ) }
-    let glass = d.line(dots).stroke(defs.glassStroke).attr('restotype', 'window')
+    let glass = d.line(dots).stroke(defs.glassStroke).attr('restotype', 'glass')
     // clickRegister(glass)
 }
 
@@ -198,7 +198,7 @@ function importData (map) {
                             dots: el.dots
                         })
                         break
-                    case 'window':
+                    case 'glass':
                         addGlass({
                             dots: el.dots
                         })

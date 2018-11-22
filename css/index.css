@@ -464,8 +464,6 @@ div {
   height: 100%;
   overflow: hidden; }
   #app #drawing {
-    border: solid 1px lightgrey;
-    margin: 5px;
     height: 100%;
     width: 100%;
     overflow: hidden; }
@@ -490,17 +488,14 @@ div {
   #app .editor-menu {
     background: white;
     padding: 22px 30px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     overflow: scroll;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center; }
+    border-top: solid 1px #edf1f2;
+    white-space: nowrap;
+    text-align: center; }
   #app .element-menu {
     position: fixed;
     bottom: 0;
@@ -517,7 +512,8 @@ div {
             align-items: center;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: center;
+    border-top: solid 1px #edf1f2; }
   #app .interface__input {
     margin-top: -16px;
     margin-right: 32px; }
@@ -549,6 +545,8 @@ div {
     border-radius: 2px;
     -ms-flex-negative: 0;
         flex-shrink: 0; }
+    #app .interface__btn:last-child {
+      margin-right: 0; }
     #app .interface__btn .btn__icon {
       width: 66px;
       height: 66px;
@@ -561,17 +559,17 @@ div {
         #app .interface__btn .btn__icon.big.icon-decor2 {
           background-size: 66px; }
       #app .interface__btn .btn__icon.icon-rotate {
-        background: #edf1f2 url("../img/rotate.png") center no-repeat;
+        background: white url("../img/rotate.png") center no-repeat;
         background-size: 30px; }
         #app .interface__btn .btn__icon.icon-rotate.right {
           -webkit-transform: scaleX(-1);
               -ms-transform: scaleX(-1);
                   transform: scaleX(-1); }
       #app .interface__btn .btn__icon.icon-copy {
-        background: #edf1f2 url("../img/copy.png") center no-repeat;
+        background: white url("../img/copy.png") center no-repeat;
         background-size: 30px; }
       #app .interface__btn .btn__icon.icon-remove {
-        background: #edf1f2 url("../img/trash.png") center no-repeat;
+        background: white url("../img/trash.png") center no-repeat;
         background-size: 30px; }
       #app .interface__btn .btn__icon.icon-decor {
         background: white url("../img/decor.svg") center no-repeat;

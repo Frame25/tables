@@ -14,8 +14,8 @@ div
   overflow: hidden
 
   #drawing
-    border: solid 1px lightgrey
-    margin: 5px
+    //border: solid 1px lightgrey
+    //margin: 5px
     height: 100%
     width: 100%
     overflow: hidden
@@ -47,13 +47,16 @@ div
   .editor-menu
     background: white
     padding: 22px 30px
-    display: flex
+    //display: flex
     position: fixed
     bottom: 0
     left: 0
     right: 0
     overflow: scroll
-    justify-content: center
+    //justify-content: center
+    border-top: solid 1px $elem-grey
+    white-space: nowrap
+    text-align: center
 
   .element-menu
     position: fixed
@@ -66,6 +69,7 @@ div
     overflow: scroll
     align-items: center
     justify-content: center
+    border-top: solid 1px $elem-grey
 
   .interface__input
     margin-top: -16px
@@ -100,6 +104,9 @@ div
     border-radius: 2px
     flex-shrink: 0
 
+    &:last-child
+      margin-right: 0
+
     .btn__icon
       width: 66px
       height: 66px
@@ -113,15 +120,15 @@ div
           background-size: 66px
 
       &.icon-rotate
-        background: $elem-grey url('../img/rotate.png') center no-repeat
+        background: white url('../img/rotate.png') center no-repeat
         background-size: 30px
         &.right
           transform: scaleX(-1)
       &.icon-copy
-        background: $elem-grey url('../img/copy.png') center no-repeat
+        background: white url('../img/copy.png') center no-repeat
         background-size: 30px
       &.icon-remove
-        background: $elem-grey url('../img/trash.png') center no-repeat
+        background: white url('../img/trash.png') center no-repeat
         background-size: 30px
       &.icon-decor
         background: white url('../img/decor.svg') center no-repeat
