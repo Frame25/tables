@@ -36,9 +36,16 @@ div
 
     image.selected-element
       outline: $blue solid 2px
+      outline-offset: 10px
+
+    .selected-table
+      rect
+        fill: $selected-table
+      text
+        fill: white
 
   .editor-menu
-    background: $menu-bg
+    background: white
     padding: 22px 30px
     display: flex
     position: fixed
@@ -53,7 +60,7 @@ div
     bottom: 0
     left: 0
     right: 0
-    background: $menu-bg
+    background: white
     display: flex
     padding: 22px 30px
     overflow: scroll
@@ -72,6 +79,7 @@ div
       margin-right: 8px
 
     input
+      background: $lightgrey
       width: 66px
       height: 66px
       border: none
@@ -104,17 +112,16 @@ div
         &.icon-decor2
           background-size: 66px
 
-
       &.icon-rotate
-        background: white url('../img/rotate.png') center no-repeat
+        background: $elem-grey url('../img/rotate.png') center no-repeat
         background-size: 30px
         &.right
           transform: scaleX(-1)
       &.icon-copy
-        background: white url('../img/copy.png') center no-repeat
+        background: $elem-grey url('../img/copy.png') center no-repeat
         background-size: 30px
       &.icon-remove
-        background: white url('../img/trash.png') center no-repeat
+        background: $elem-grey url('../img/trash.png') center no-repeat
         background-size: 30px
       &.icon-decor
         background: white url('../img/decor.svg') center no-repeat
@@ -126,7 +133,7 @@ div
         background: white url('../img/decor2.svg') center no-repeat
         background-size: 44px
       &.icon-table
-        background: white url('../img/sofa.png') 30px 12px no-repeat
+        background: $elem-grey url('../img/sofa.png') 30px 12px no-repeat
         background-size: 16px
         position: relative
         .table-guest
@@ -137,7 +144,7 @@ div
           font-size: 17px
           font-family: $SFD
       &.icon-text
-        background: white
+        background: $elem-grey
         text-align: center
         font-size: 36px
         line-height: .9

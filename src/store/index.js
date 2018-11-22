@@ -20,8 +20,11 @@ resize.call(this, SVG)
 const defGrid = 22
 const defY = defGrid * 15
 const defX = defGrid * 22
-function xGrid (num = 14) {
+function xGrid (num = 1) {
     return defGrid * num
+}
+function howManiGrig (num = 1) {
+    return Math.round(num / defGrid)
 }
 const defs = {
     selectOptionsLine: {pointSize: defGrid, rotationPoint: false, deepSelect: true},
@@ -35,8 +38,8 @@ const defs = {
         width: xGrid(3),
         widthB: xGrid(4),
         height: xGrid(3),
-        radius: 4,
-        fill: '#fff',
+        radius: 8,
+        fill: '#edf1f2',
         numberFont: {
             size: 40,
             fill: '#646666',
@@ -112,7 +115,7 @@ const store = new Vuex.Store({
     actions: {
         fillWithPattern ({ state }) {
             const pattern = state.d.pattern(22, 22, add => {
-                add.rect(22, 22).fill('#f5f7f7')
+                add.rect(22, 22).fill('#ffffff')
                 add.circle(2).fill('#C8CBCC')
             })
             state.d.rect('100%', '100%').fill(pattern)
@@ -208,7 +211,7 @@ const store = new Vuex.Store({
         },
 
         // ----------- CREATION ACTIONS -->
-        addTable ({ state, dispatch, commit }, { guests = 2, number = null, position = null } = {}) {
+        addTable ({ state, dispatch, commit }, { guests = 2, number = null, position = defs.startPos } = {}) {
             // params: { guests: Number, number: Number, position: Array(x, y) }
 
             let tableWidth = guests > 3 ? defs.table.widthB : defs.table.width
@@ -220,58 +223,63 @@ const store = new Vuex.Store({
             let guestsNum = state.d.text(String(guests)).font(defs.table.guestsFont).addClass('guests-num').y(-5).x(20)
 
             guestsEl.add(sofa).add(guestsNum)
-            tableEl.add(rect).add(tableNum).add(guestsEl).move(...(position || defs.startPos)).draggable(defs.dragOptions2).addClass('table').attr('restotype', 'table')
+            tableEl.add(rect).add(tableNum).add(guestsEl).move(...position).draggable(defs.dragOptions2).addClass('table').attr('restotype', 'table')
 
             commit('increaseTable')
             dispatch('registerSelectElement', tableEl)
         },
-        addText ({ state, dispatch }, { text = 'Text', position = null } = {}) {
+        addText ({ state, dispatch }, { text = 'Text', position = defs.startPos } = {}) {
             // params: { text: String, position: Array(x, y) }
             let textBlock = state.d.text(text)
                 .draggable(defs.dragOptions)
                 .font(defs.textFont)
-                .move(...(position || defs.startPos))
+                .move(...position)
 
             dispatch('registerSelectElement', textBlock)
         },
-        addWall ({ state, dispatch }, { dots = null } = {}) {
+        addWall ({ state, dispatch }, { dots = defs.lineStartDots } = {}) {
             // params: { dots: Array( Array(x, y), Array(x, y) ) }
-            let wall = state.d.line(dots || defs.lineStartDots).stroke(defs.wallStroke).draggable(defs.dragOptions).attr('restotype', 'wall')
+            let wall = state.d.line(dots).stroke(defs.wallStroke).draggable(defs.dragOptions).attr('restotype', 'wall')
             dispatch('registerSelectElement', wall)
         },
-        addBar ({ state, dispatch }, { dots = null } = {}) {
+        addBar ({ state, dispatch }, { dots = defs.lineStartDots } = {}) {
             // params: { dots: Array( Array(x, y), Array(x, y) ) }
-            let bar = state.d.line(dots || defs.lineStartDots).stroke(defs.barStroke).draggable(defs.dragOptions).attr('restotype', 'bar')
+            let bar = state.d.line(dots).stroke(defs.barStroke).draggable(defs.dragOptions).attr('restotype', 'bar')
             dispatch('registerSelectElement', bar)
         },
-        addGlass ({ state, dispatch }, { dots = null } = {}) {
+        addGlass ({ state, dispatch }, { dots = defs.lineStartDots } = {}) {
             // params: { dots: Array( Array(x, y), Array(x, y) ) }
-            let glass = state.d.line(dots || defs.lineStartDots).stroke(defs.glassStroke).draggable(defs.dragOptions).attr('restotype', 'window')
+            let glass = state.d.line(dots).stroke(defs.glassStroke).draggable(defs.dragOptions).attr('restotype', 'window')
             dispatch('registerSelectElement', glass)
         },
-        addBarnchair ({ state, dispatch }, { position = null } = {}) {
+        addBarnchair ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/barnchair.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'barnchair')
+            let decor = state.d.image('img/barnchair.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'barnchair')
             dispatch('registerSelectElement', decor)
         },
-        addDecor ({ state, dispatch }, { position = null } = {}) {
+        addDecor ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/decor.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'decor')
+            let decor = state.d.image('img/decor.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'decor')
             dispatch('registerSelectElement', decor)
         },
-        addDecor2 ({ state, dispatch }, { position = null } = {}) {
+        addDecor2 ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/decor2.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', 'decor2')
+            let decor = state.d.image('img/decor2.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'decor2')
             dispatch('registerSelectElement', decor)
         },
-        addDecorMulti ({ state, dispatch }, { position = null, type = 'decor' } = {}) {
+        addDecorMulti ({ state, dispatch }, { position = defs.startPos, type = 'decor' } = {}) {
             // params: { position: Array(x, y) }
             if (type !== 'decor' && type !== 'decor2' && type !== 'barnchair') {
                 throw new Error('unregistered type of decor')
                 return false
             }
-            let decor = state.d.image('img/' + type + '.svg').draggable(defs.dragOptions).move(...(position || defs.startPos)).attr('restotype', type)
+            let decor = state.d.image('img/' + type + '.svg').draggable(defs.dragOptions).move(...position).attr('restotype', type)
             dispatch('registerSelectElement', decor)
+        },
+        changeScale ({ state }, num = 3) {
+            let width = state.d.viewbox().width + xGrid(num)
+            let height = width / 4 * 3
+            state.d.viewbox(0, 0, width, height)
         },
 
         // ----------- EXPORT -->
@@ -319,7 +327,7 @@ const store = new Vuex.Store({
                             dots: this.array().value
                         })
                         break
-                    case 'glass':
+                    case 'window':
                         expData.elements.push({
                             type,
                             dots: this.array().value
@@ -350,7 +358,7 @@ const store = new Vuex.Store({
                 }
             })
             window.localStorage.setItem('restoclub_last_map', JSON.stringify(expData))
-            console.log(expData)
+            console.log(JSON.stringify(expData))
             window.postMessage(JSON.stringify(expData))
         }
     }

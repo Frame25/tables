@@ -6,7 +6,8 @@ const sorting = require('postcss-sorting')
 
 const build = {
   entry: {
-    index: path.resolve(__dirname, 'src/pages/index.js')
+    index: path.resolve(__dirname, 'src/pages/index.js'),
+    output: path.resolve(__dirname, 'src/pages/output.js')
   },
   output: {
     path: path.resolve(__dirname, './'),
@@ -83,6 +84,12 @@ const build = {
       filename: 'index.html',
       template: './src/pug/index.pug',
       chunks: ['index']
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Output',
+      filename: 'output.html',
+      template: './src/pug/output.pug',
+      chunks: ['output']
     }),
     new ExtractTextPlugin({
       filename: 'css/[name].css?[hash]'
