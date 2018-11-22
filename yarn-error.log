@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn run dev
+  /usr/local/bin/node /usr/local/bin/yarn run build
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mongodb/bin
@@ -5588,9 +5588,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: sh
-  Arguments: -c webpack-dev-server --env development --mode=development
+  Arguments: -c webpack --env production --mode=production
   Directory: /Users/pavel_k/Pavel_K/Проекты/tables
   Output:
   

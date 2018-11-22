@@ -377,64 +377,6 @@ const store = new Vuex.Store({
             window.localStorage.setItem('restoclub_last_map', JSON.stringify(expData))
             console.log(JSON.stringify(expData))
             window.postMessage(JSON.stringify(expData))
-        },
-
-        // ----------- IMPORT -->
-        importData (map) {
-            if (map) {
-                let json = typeof map === 'string' ? JSON.parse(map) : map
-                d.viewbox(0, 0, json.width, json.height)
-                if (json.elements && json.elements.length) {
-                    json.elements.forEach(el => {
-                        switch (el.type) {
-                            case 'table':
-                                addTable({
-                                    position: [el.x, el.y],
-                                    number: el.number,
-                                    guests: el.guests
-                                })
-                                break
-                            case 'text':
-                                addText({
-                                    text: el.text,
-                                    position: [el.x, el.y],
-                                })
-                                break
-                            case 'wall':
-                                addWall({
-                                    dots: el.dots
-                                })
-                                break
-                            case 'bar':
-                                addBar({
-                                    dots: el.dots
-                                })
-                                break
-                            case 'glass':
-                                addGlass({
-                                    dots: el.dots
-                                })
-                                break
-                            case 'decor':
-                                addDecor({
-                                    position: [el.x, el.y]
-                                })
-                                break
-                            case 'decor2':
-                                addDecor2({
-                                    position: [el.x, el.y]
-                                })
-                                break
-                            case 'barnchair':
-                                addBarnchair({
-                                    position: [el.x, el.y]
-                                })
-                                break
-
-                        }
-                    })
-                }
-            }
         }
     }
 })
