@@ -31,6 +31,10 @@ const defs = {
     resizeOptions: {snapToGrid: defGrid / 2, snapToAngle: 45},
     startPos: [defX, defY],
     lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
+    viewbox: {
+        width: 1024,
+        height: 768
+    },
     table: {
         width: xGrid(3),
         widthB: xGrid(4),
@@ -78,7 +82,7 @@ const defs = {
 // ------------------------------------------
 const store = new Vuex.Store({
     state: {
-        d: SVG('drawing').size('100%', '100%').viewbox(0, 0, 1024, 768),
+        d: SVG('drawing').size('100%', '100%').viewbox(0, 0, defs.viewbox.width, defs.viewbox.height),
         selectedElement: null,
         selectedElementText: null,
         selectedElementGuests: null,
@@ -115,7 +119,7 @@ const store = new Vuex.Store({
                 add.rect(22, 22).fill('#ffffff')
                 add.circle(2).fill('#C8CBCC')
             })
-            state.d.rect(2000, 1000).fill(pattern).dx(-300)
+            state.d.rect(2000, 2000).fill(pattern).dx(-300)
         },
 
         // ----------- ELEMENTS` ACTIONS -->
@@ -277,6 +281,10 @@ const store = new Vuex.Store({
         changeScale ({ state }, num = 3) {
             let width = state.d.viewbox().width + xGrid(num)
             let height = width / 4 * 3
+
+            if (width < defs.viewbox.width) width = defs.viewbox.width
+            if (height < defs.viewbox.height) height = defs.viewbox.height
+
             state.d.viewbox(0, 0, width, height)
         },
 
