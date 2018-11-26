@@ -9,75 +9,71 @@ html(lang="en")
       #drawing
       #interface
 
-        .scale-btns
-          .scale-btn__plus(@click="$store.dispatch('changeScale', -3)")
-          .scale-btn__minus(@click="$store.dispatch('changeScale')")
-
         transition-group(name="fade")
           .editor-menu(v-if="$store.state.editorMenu" key="one")
             .interface__btn.add-table(@click="$store.dispatch('addTable')")
               .btn__icon.icon-table
                 .table-guest 2
-              .btn__text Add table
+              .btn__text 2-местный
             .interface__btn.add-table(@click="$store.dispatch('addTable', {guests: 4})")
               .btn__icon.icon-table.big
                 .table-guest 4
-              .btn__text Add table 4
+              .btn__text 4-местный
             .interface__btn.add-table(@click="$store.dispatch('addTable', {guests: 6})")
               .btn__icon.icon-table.big
                 .table-guest 6
-              .btn__text Add table 6
+              .btn__text 6-местный
             .interface__btn.add-text(@click="$store.dispatch('addText')")
               .btn__icon.icon-text T
-              .btn__text Add text
+              .btn__text Текст
             .interface__btn.add-line(@click="$store.dispatch('addWall')")
               .btn__icon.icon-line
                 .line.grey
-              .btn__text Add wall
+              .btn__text Стена
             .interface__btn.add-window(@click="$store.dispatch('addGlass')")
               .btn__icon.icon-line
                 .line.blue
-              .btn__text Add windows
+              .btn__text Стекло
             .interface__btn.add-bar(@click="$store.dispatch('addBar')")
               .btn__icon.icon-line
                 .line.brown
-              .btn__text Add bar
+              .btn__text Барная стойка
             .interface__btn.add-barnchair(@click="$store.dispatch('addBarnchair')")
               .btn__icon.icon-barnchair
-              .btn__text Add barnchair
+              .btn__text Барный стул
             .interface__btn.add-decor(@click="$store.dispatch('addDecor')")
               .btn__icon.icon-decor
-              .btn__text Add decor
+              .btn__text Декор
             .interface__btn.add-decor2(@click="$store.dispatch('addDecor2')")
               .btn__icon.icon-decor2.big
-              .btn__text Add decor 2
+              .btn__text Мега-декор
             .interface__btn.export(@click="$store.dispatch('exportData')")
-              .btn__icon.icon-text E
-              .btn__text Export
+              .btn__icon.icon-text Ээ
+              .btn__text Экспорт
             .interface__btn.clear(@click="$store.dispatch('clearAll')")
-              .btn__icon.icon-text C
-              .btn__text Clear
+              .btn__icon.icon-text Оч
+              .btn__text Очистить
 
 
           .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
             .interface__input.table-number(v-if="$store.state.selectedElement.attr('restotype') === 'table'")
-              span Table number
+              span Номер стола
               input(v-model="tableNum" @input="tableNumSend")
             .interface__input.table-number.wide(v-if="$store.state.selectedElement.type ==='text'")
-              span Text
+              span Текст
               input(v-model="elementText" @input="elementTextSend")
             .interface__input.table-guests(v-if="$store.state.selectedElement.attr('restotype') === 'table'")
-              span Number of guests
+              span Кол. гостей
               input(v-model="guestNum" @input="guestNumSend")
             .interface__btn.rotate-left(@click="$store.dispatch('rotateElement', 'left')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'")
               .btn__icon.icon-rotate
-              .btn__text Rotate left
+              .btn__text Повернуть влево
             .interface__btn.rotate-right(@click="$store.dispatch('rotateElement')" v-if="$store.state.selectedElement.type ==='line' || $store.state.selectedElement.type ==='text'")
               .btn__icon.icon-rotate.right
-              .btn__text Rotate right
+              .btn__text Повернуть вправо
             .interface__btn.copy-element(@click="$store.dispatch('copyElement')")
               .btn__icon.icon-copy
-              .btn__text Copy
+              .btn__text Дублировать
             .interface__btn.remove-element(@click="$store.dispatch('removeElement')")
               .btn__icon.icon-remove
-              .btn__text Remove
+              .btn__text Удалить

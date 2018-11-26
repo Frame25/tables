@@ -82,7 +82,7 @@ const pattern = d.pattern(22, 22, add => {
     add.rect(22, 22).fill('#ffffff')
     add.circle(2).fill('#C8CBCC')
 })
-const patternRect = d.rect(100, 100).attr('restotype', 'pattern')
+const patternRect = d.rect(100, 100)
 
 // ------------------------------------------
 // THE STORE
@@ -285,15 +285,13 @@ const store = new Vuex.Store({
             let decor = state.d.image('img/' + type + '.png', type === 'decor2' ? xGrid(4) : xGrid(3), xGrid(3)).draggable(defs.dragOptions).move(...position).attr('restotype', type)
             dispatch('registerSelectElement', decor)
         },
-        changeScale ({ state, dispatch }, num = 3) {
-            let width = state.d.viewbox().width + xGrid(num)
-            let height = width / 4 * 3
+        changeScale ({ state, dispatch }, {dx = 0, dy = 0} = {}) {
+            let width = state.d.viewbox().width + xGrid(dx)
+            let height = state.d.viewbox().height + xGrid(dy)
             // let height = state.d.viewbox().height + xGrid(num - 1)
 
             if (width < defs.viewbox.width) width = defs.viewbox.width
             if (height < defs.viewbox.height) height = defs.viewbox.height
-
-            height -= 110
 
             state.d.viewbox(0, 0, width, height)
             dispatch('fillWithPattern', {width, height})
