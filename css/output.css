@@ -518,6 +518,8 @@ div {
         font-family: SFD, Helvetica, Arial, sans-serif;
         font-weight: 200;
         text-align: center; }
+        #app #interface .interface__input input:focus {
+          outline: none; }
     #app #interface .interface__btn {
       display: inline-block;
       margin-right: 32px;

@@ -18,7 +18,7 @@ resize.call(this, SVG)
 // DEFAULTS
 // ------------------------------------------
 const defGrid = 22
-const defY = xGrid(15)
+const defY = xGrid(22)
 const defX = xGrid(22)
 function xGrid (num = 1) {
     return defGrid * parseFloat(num)
