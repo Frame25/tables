@@ -547,13 +547,12 @@ div {
       #app #interface .interface__input span {
         margin-right: 8px; }
       #app #interface .interface__input input {
-        background: #f5f7f7;
         width: 66px;
         height: 66px;
-        border: none;
+        border: solid 1px #e1e5e6;
         border-radius: 8px;
         padding: 0;
-        font-size: 40px;
+        font-size: 24px;
         display: inline-block;
         vertical-align: middle;
         font-family: SFD, Helvetica, Arial, sans-serif;
@@ -584,17 +583,17 @@ div {
           #app #interface .interface__btn .btn__icon.big.icon-decor2 {
             background-size: 66px; }
         #app #interface .interface__btn .btn__icon.icon-rotate {
-          background: white url("../img/rotate.png") center no-repeat;
+          background: #f5f7f7 url("../img/rotate.png") center no-repeat;
           background-size: 30px; }
           #app #interface .interface__btn .btn__icon.icon-rotate.right {
             -webkit-transform: scaleX(-1);
                 -ms-transform: scaleX(-1);
                     transform: scaleX(-1); }
         #app #interface .interface__btn .btn__icon.icon-copy {
-          background: white url("../img/copy.png") center no-repeat;
+          background: #f5f7f7 url("../img/copy.png") center no-repeat;
           background-size: 30px; }
         #app #interface .interface__btn .btn__icon.icon-remove {
-          background: white url("../img/trash.png") center no-repeat;
+          background: #f5f7f7 url("../img/trash.png") center no-repeat;
           background-size: 30px; }
         #app #interface .interface__btn .btn__icon.icon-decor {
           background: white url("../img/decor.svg") center no-repeat;
@@ -619,8 +618,9 @@ div {
         #app #interface .interface__btn .btn__icon.icon-text {
           background: #edf1f2;
           text-align: center;
-          font-size: 36px;
-          line-height: .9; }
+          font-size: 24px;
+          font-family: SFD, Helvetica, Arial, sans-serif;
+          line-height: 1.2; }
         #app #interface .interface__btn .btn__icon.icon-line {
           background: white;
           position: relative; }
@@ -632,7 +632,7 @@ div {
             left: 23px;
             border-radius: 50px; }
             #app #interface .interface__btn .btn__icon.icon-line .line.grey {
-              background-color: #e1e5e6; }
+              background-color: #edf1f2; }
             #app #interface .interface__btn .btn__icon.icon-line .line.brown {
               background-color: #ebd7ce; }
             #app #interface .interface__btn .btn__icon.icon-line .line.blue {
@@ -641,7 +641,8 @@ div {
         text-align: center;
         font-weight: 300;
         margin-top: 5px;
-        font-size: 10px; }
+        font-size: 10px;
+        color: #969899; }
 
 .fade-enter-active, .fade-leave-active {
   -webkit-transition-property: all;

@@ -33,7 +33,7 @@ const defs = {
     lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
     viewbox: {
         width: 1024,
-        height: 768
+        height: 604
     },
     table: {
         width: xGrid(3),
@@ -61,7 +61,7 @@ const defs = {
     },
     wallStroke: {
         width: 22,
-        color: '#e1e5e6',
+        color: '#edf1f2',
         linecap: 'round'
     },
     barStroke: {
@@ -137,20 +137,22 @@ const store = new Vuex.Store({
             dispatch('unselectAll')
             commit('setSelectedEl', elem)
 
+            // select
             if (elem.type === 'line') elem.selectize(defs.selectOptionsLine).resize(defs.resizeOptions)
             else elem.addClass(defs.selectClass)
 
+            // selected text
             if (elem.attr().restotype === 'table') {
                 let txt = elem.select('.table-num').first().text()
                 let gst = elem.select('.guests-num').first().text()
                 commit('setSelectedElText', txt)
                 commit('setSelectedElGuests', gst)
-                elem.draggable(defs.dragOptions2)
             }
-            else {
-                if (elem.type === 'text') commit('setSelectedElText', elem.text())
-                elem.draggable(defs.dragOptions)
-            }
+            if (elem.type === 'text') commit('setSelectedElText', elem.text())
+
+            // drag
+            if (elem.type === 'line') elem.draggable(defs.dragOptions)
+            else elem.draggable(defs.dragOptions2)
 
             commit('setElementMenu', true)
             commit('setEditorMenu', false)
@@ -281,11 +283,12 @@ const store = new Vuex.Store({
         changeScale ({ state }, num = 3) {
             let width = state.d.viewbox().width + xGrid(num)
             let height = width / 4 * 3
+            // let height = state.d.viewbox().height + xGrid(num - 1)
 
             if (width < defs.viewbox.width) width = defs.viewbox.width
             if (height < defs.viewbox.height) height = defs.viewbox.height
 
-            state.d.viewbox(0, 0, width, height)
+            state.d.viewbox(0, 0, width, height - 164)
         },
 
         // ----------- EXPORT -->
