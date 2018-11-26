@@ -412,7 +412,6 @@ template {
   font-style: normal; }
 
 body {
-  overflow: hidden;
   font-family: SF, Helvetica, Arial, sans-serif; }
 
 div {
@@ -422,11 +421,16 @@ div {
 #app {
   width: 100%;
   height: 100%;
-  overflow: hidden; }
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
   #app #drawing {
-    height: 100%;
-    width: 100%;
-    overflow: hidden; }
+    height: calc(100vh - 110px);
+    width: 100%; }
     #app #drawing .svg_select_points_point {
       fill: white;
       stroke: #96d9fa;
@@ -439,144 +443,165 @@ div {
     #app #drawing .selected-element > tspan {
       outline: #96d9fa solid 2px; }
     #app #drawing image.selected-element {
-      outline: #96d9fa solid 2px;
-      outline-offset: 10px; }
+      outline: #96d9fa solid 2px; }
     #app #drawing .selected-table rect {
       fill: #44b2cc; }
     #app #drawing .selected-table text {
       fill: white; }
-  #app .editor-menu {
-    background: white;
-    padding: 22px 30px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: scroll;
-    border-top: solid 1px #edf1f2;
-    white-space: nowrap;
-    text-align: center; }
-  #app .element-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 22px 30px;
-    overflow: scroll;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    border-top: solid 1px #edf1f2; }
-  #app .interface__input {
-    margin-top: -16px;
-    margin-right: 32px; }
-    #app .interface__input.wide input {
-      width: 150px; }
-    #app .interface__input span {
-      margin-right: 8px; }
-    #app .interface__input input {
-      background: #f5f7f7;
-      width: 66px;
-      height: 66px;
-      border: none;
-      border-radius: 8px;
-      padding: 0;
-      font-size: 40px;
-      display: inline-block;
-      vertical-align: middle;
-      font-family: SFD, Helvetica, Arial, sans-serif;
-      font-weight: 200;
-      text-align: center; }
-  #app .interface__btn {
-    display: inline-block;
-    margin-right: 32px;
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    border-radius: 2px;
-    -ms-flex-negative: 0;
-        flex-shrink: 0; }
-    #app .interface__btn:last-child {
-      margin-right: 0; }
-    #app .interface__btn .btn__icon {
-      width: 66px;
-      height: 66px;
-      padding: 20px;
+  #app #interface {
+    -ms-flex-negative: 1;
+        flex-shrink: 1;
+    height: 110px; }
+    #app #interface .scale-btns {
+      position: fixed;
+      right: 30px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+              transform: translateY(-50%);
+      width: 50px;
+      height: 150px;
+      background: #edf1f2;
       border-radius: 8px; }
-      #app .interface__btn .btn__icon.big {
-        width: 88px; }
-        #app .interface__btn .btn__icon.big.icon-table {
-          background-position-x: 52px; }
-        #app .interface__btn .btn__icon.big.icon-decor2 {
-          background-size: 66px; }
-      #app .interface__btn .btn__icon.icon-rotate {
-        background: white url("../img/rotate.png") center no-repeat;
-        background-size: 30px; }
-        #app .interface__btn .btn__icon.icon-rotate.right {
-          -webkit-transform: scaleX(-1);
-              -ms-transform: scaleX(-1);
-                  transform: scaleX(-1); }
-      #app .interface__btn .btn__icon.icon-copy {
-        background: white url("../img/copy.png") center no-repeat;
-        background-size: 30px; }
-      #app .interface__btn .btn__icon.icon-remove {
-        background: white url("../img/trash.png") center no-repeat;
-        background-size: 30px; }
-      #app .interface__btn .btn__icon.icon-decor {
-        background: white url("../img/decor.svg") center no-repeat;
-        background-size: 44px; }
-      #app .interface__btn .btn__icon.icon-barnchair {
-        background: white url("../img/barnchair.svg") center no-repeat;
-        background-size: 44px; }
-      #app .interface__btn .btn__icon.icon-decor2 {
-        background: white url("../img/decor2.svg") center no-repeat;
-        background-size: 44px; }
-      #app .interface__btn .btn__icon.icon-table {
-        background: #edf1f2 url("../img/sofa.png") 30px 12px no-repeat;
-        background-size: 16px;
-        position: relative; }
-        #app .interface__btn .btn__icon.icon-table .table-guest {
-          position: absolute;
-          top: 7px;
-          right: 7px;
-          font-weight: 200;
-          font-size: 17px;
-          font-family: SFD, Helvetica, Arial, sans-serif; }
-      #app .interface__btn .btn__icon.icon-text {
-        background: #edf1f2;
+      #app #interface .scale-btns .scale-btn__plus,
+      #app #interface .scale-btns .scale-btn__minus {
+        height: 75px; }
+        #app #interface .scale-btns .scale-btn__plus::before,
+        #app #interface .scale-btns .scale-btn__minus::before {
+          display: block;
+          text-align: center;
+          font-size: 40px;
+          font-family: SFD, Helvetica, Arial, sans-serif;
+          line-height: 1.7;
+          font-weight: 200; }
+      #app #interface .scale-btns .scale-btn__plus {
+        border-bottom: solid 1px #e1e5e6; }
+        #app #interface .scale-btns .scale-btn__plus::before {
+          content: '+'; }
+      #app #interface .scale-btns .scale-btn__minus::before {
+        content: '-'; }
+    #app #interface .editor-menu, #app #interface .element-menu {
+      background: white;
+      padding: 11px 30px;
+      overflow: scroll;
+      border-top: solid 1px #edf1f2;
+      height: 110px; }
+    #app #interface .editor-menu {
+      white-space: nowrap;
+      text-align: center; }
+    #app #interface .element-menu {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+    #app #interface .interface__input {
+      margin-top: -16px;
+      margin-right: 32px; }
+      #app #interface .interface__input.wide input {
+        width: 150px; }
+      #app #interface .interface__input span {
+        margin-right: 8px; }
+      #app #interface .interface__input input {
+        background: #f5f7f7;
+        width: 66px;
+        height: 66px;
+        border: none;
+        border-radius: 8px;
+        padding: 0;
+        font-size: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: SFD, Helvetica, Arial, sans-serif;
+        font-weight: 200;
+        text-align: center; }
+    #app #interface .interface__btn {
+      display: inline-block;
+      margin-right: 32px;
+      cursor: pointer;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      border-radius: 2px;
+      -ms-flex-negative: 0;
+          flex-shrink: 0; }
+      #app #interface .interface__btn:last-child {
+        margin-right: 0; }
+      #app #interface .interface__btn .btn__icon {
+        width: 66px;
+        height: 66px;
+        padding: 20px;
+        border-radius: 8px; }
+        #app #interface .interface__btn .btn__icon.big {
+          width: 88px; }
+          #app #interface .interface__btn .btn__icon.big.icon-table {
+            background-position-x: 52px; }
+          #app #interface .interface__btn .btn__icon.big.icon-decor2 {
+            background-size: 66px; }
+        #app #interface .interface__btn .btn__icon.icon-rotate {
+          background: white url("../img/rotate.png") center no-repeat;
+          background-size: 30px; }
+          #app #interface .interface__btn .btn__icon.icon-rotate.right {
+            -webkit-transform: scaleX(-1);
+                -ms-transform: scaleX(-1);
+                    transform: scaleX(-1); }
+        #app #interface .interface__btn .btn__icon.icon-copy {
+          background: white url("../img/copy.png") center no-repeat;
+          background-size: 30px; }
+        #app #interface .interface__btn .btn__icon.icon-remove {
+          background: white url("../img/trash.png") center no-repeat;
+          background-size: 30px; }
+        #app #interface .interface__btn .btn__icon.icon-decor {
+          background: white url("../img/decor.svg") center no-repeat;
+          background-size: 44px; }
+        #app #interface .interface__btn .btn__icon.icon-barnchair {
+          background: white url("../img/barnchair.svg") center no-repeat;
+          background-size: 44px; }
+        #app #interface .interface__btn .btn__icon.icon-decor2 {
+          background: white url("../img/decor2.svg") center no-repeat;
+          background-size: 44px; }
+        #app #interface .interface__btn .btn__icon.icon-table {
+          background: #edf1f2 url("../img/sofa.png") 30px 12px no-repeat;
+          background-size: 16px;
+          position: relative; }
+          #app #interface .interface__btn .btn__icon.icon-table .table-guest {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            font-weight: 200;
+            font-size: 17px;
+            font-family: SFD, Helvetica, Arial, sans-serif; }
+        #app #interface .interface__btn .btn__icon.icon-text {
+          background: #edf1f2;
+          text-align: center;
+          font-size: 36px;
+          line-height: .9; }
+        #app #interface .interface__btn .btn__icon.icon-line {
+          background: white;
+          position: relative; }
+          #app #interface .interface__btn .btn__icon.icon-line .line {
+            position: absolute;
+            width: 22px;
+            height: 44px;
+            top: 11px;
+            left: 23px;
+            border-radius: 50px; }
+            #app #interface .interface__btn .btn__icon.icon-line .line.grey {
+              background-color: #e1e5e6; }
+            #app #interface .interface__btn .btn__icon.icon-line .line.brown {
+              background-color: #ebd7ce; }
+            #app #interface .interface__btn .btn__icon.icon-line .line.blue {
+              background-color: #96d9fa; }
+      #app #interface .interface__btn .btn__text {
         text-align: center;
-        font-size: 36px;
-        line-height: .9; }
-      #app .interface__btn .btn__icon.icon-line {
-        background: white;
-        position: relative; }
-        #app .interface__btn .btn__icon.icon-line .line {
-          position: absolute;
-          width: 22px;
-          height: 44px;
-          top: 11px;
-          left: 23px;
-          border-radius: 50px; }
-          #app .interface__btn .btn__icon.icon-line .line.grey {
-            background-color: #e1e5e6; }
-          #app .interface__btn .btn__icon.icon-line .line.brown {
-            background-color: #ebd7ce; }
-          #app .interface__btn .btn__icon.icon-line .line.blue {
-            background-color: #96d9fa; }
-    #app .interface__btn .btn__text {
-      text-align: center;
-      font-weight: 300;
-      margin-top: 5px;
-      font-size: 10px; }
+        font-weight: 300;
+        margin-top: 5px;
+        font-size: 10px; }
 
 .fade-enter-active, .fade-leave-active {
   -webkit-transition-property: all;

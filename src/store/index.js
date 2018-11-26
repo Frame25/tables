@@ -18,20 +18,17 @@ resize.call(this, SVG)
 // DEFAULTS
 // ------------------------------------------
 const defGrid = 22
-const defY = defGrid * 15
-const defX = defGrid * 22
+const defY = xGrid(15)
+const defX = xGrid(22)
 function xGrid (num = 1) {
-    return defGrid * num
-}
-function howManiGrig (num = 1) {
-    return Math.round(num / defGrid)
+    return defGrid * parseFloat(num)
 }
 const defs = {
     selectOptionsLine: {pointSize: defGrid, rotationPoint: false, deepSelect: true},
     selectClass: 'selected-element',
-    dragOptions: {snapToGrid: xGrid(0.5)},
+    dragOptions: {snapToGrid: defGrid / 2},
     dragOptions2: {snapToGrid: defGrid},
-    resizeOptions: {snapToGrid: xGrid(0.5), snapToAngle: 45},
+    resizeOptions: {snapToGrid: defGrid / 2, snapToAngle: 45},
     startPos: [defX, defY],
     lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
     table: {
@@ -118,7 +115,7 @@ const store = new Vuex.Store({
                 add.rect(22, 22).fill('#ffffff')
                 add.circle(2).fill('#C8CBCC')
             })
-            state.d.rect('100%', '100%').fill(pattern)
+            state.d.rect(2000, 1000).fill(pattern).dx(-300)
         },
 
         // ----------- ELEMENTS` ACTIONS -->
@@ -137,7 +134,7 @@ const store = new Vuex.Store({
             commit('setSelectedEl', elem)
 
             if (elem.type === 'line') elem.selectize(defs.selectOptionsLine).resize(defs.resizeOptions)
-            else elem.addClass(defs.selectClass) //dispatch('drawOutline', elem)
+            else elem.addClass(defs.selectClass)
 
             if (elem.attr().restotype === 'table') {
                 let txt = elem.select('.table-num').first().text()
@@ -154,21 +151,6 @@ const store = new Vuex.Store({
             commit('setElementMenu', true)
             commit('setEditorMenu', false)
         },
-        // drawOutline ({ state }, el) {
-        //     if (el) {
-        //         let {
-        //             x = el.bbox().x,
-        //             y = el.bbox().y,
-        //             x2 = el.bbox().x2,
-        //             y2 = el.bbox().y2
-        //         } = {}
-        //         state.d.polyline([x,y, x,y2, x2,y2, x2,y, x,y]).addClass('element-outline').fill('none').stroke('#96d9fa')
-        //     }
-        // },
-        // deleteOutline({ state }) {
-        //     if (state.d.select('element-outline').length)
-        //         state.d.select('element-outline').first().remove()
-        // },
         unselectAll ({ state, commit, dispatch }) {
             commit('setSelectedEl', null)
             commit('setElementMenu', false)
@@ -177,7 +159,6 @@ const store = new Vuex.Store({
                 this.selectize(false, {deepSelect: true}).resize(false)
                 if (this.hasClass(defs.selectClass)) this.removeClass(defs.selectClass)
             })
-            // dispatch('deleteOutline')
         },
         copyElement ({ state, dispatch, commit }) {
             if (state.selectedElement) {
@@ -271,17 +252,17 @@ const store = new Vuex.Store({
         },
         addBarnchair ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/barnchair.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'barnchair')
+            let decor = state.d.image('img/barnchair.png', xGrid(3), xGrid(3)).draggable(defs.dragOptions2).move(...position).attr('restotype', 'barnchair')
             dispatch('registerSelectElement', decor)
         },
         addDecor ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/decor.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'decor')
+            let decor = state.d.image('img/decor.png', xGrid(3), xGrid(3)).draggable(defs.dragOptions2).move(...position).attr('restotype', 'decor')
             dispatch('registerSelectElement', decor)
         },
         addDecor2 ({ state, dispatch }, { position = defs.startPos } = {}) {
             // params: { position: Array(x, y) }
-            let decor = state.d.image('img/decor2.svg').draggable(defs.dragOptions).move(...position).attr('restotype', 'decor2')
+            let decor = state.d.image('img/decor2.png', xGrid(4), xGrid(3)).draggable(defs.dragOptions2).move(...position).attr('restotype', 'decor2')
             dispatch('registerSelectElement', decor)
         },
         addDecorMulti ({ state, dispatch }, { position = defs.startPos, type = 'decor' } = {}) {
@@ -290,7 +271,7 @@ const store = new Vuex.Store({
                 throw new Error('unregistered type of decor')
                 return false
             }
-            let decor = state.d.image('img/' + type + '.svg').draggable(defs.dragOptions).move(...position).attr('restotype', type)
+            let decor = state.d.image('img/' + type + '.png', type === 'decor2' ? xGrid(4) : xGrid(3), xGrid(3)).draggable(defs.dragOptions).move(...position).attr('restotype', type)
             dispatch('registerSelectElement', decor)
         },
         changeScale ({ state }, num = 3) {

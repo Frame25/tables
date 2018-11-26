@@ -2,7 +2,7 @@
 @import defaults
 
 body
-  overflow: hidden
+  //overflow: hidden
   font-family: $SF
 
 div
@@ -11,14 +11,16 @@ div
 #app
   width: 100%
   height: 100%
-  overflow: hidden
+  //overflow: hidden
+  display: flex
+  flex-direction: column
 
   #drawing
     //border: solid 1px lightgrey
     //margin: 5px
-    height: 100%
+    height: calc(100vh - 110px)
     width: 100%
-    overflow: hidden
+    //overflow: hidden
 
     .svg_select_points_point
       fill: white
@@ -36,7 +38,7 @@ div
 
     image.selected-element
       outline: $blue solid 2px
-      outline-offset: 10px
+      //outline-offset: 10px
 
     .selected-table
       rect
@@ -44,139 +46,162 @@ div
       text
         fill: white
 
-  .editor-menu
-    background: white
-    padding: 22px 30px
-    //display: flex
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
-    overflow: scroll
-    //justify-content: center
-    border-top: solid 1px $elem-grey
-    white-space: nowrap
-    text-align: center
+  #interface
+    flex-shrink: 1
+    height: 110px
 
-  .element-menu
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
-    background: white
-    display: flex
-    padding: 22px 30px
-    overflow: scroll
-    align-items: center
-    justify-content: center
-    border-top: solid 1px $elem-grey
-
-  .interface__input
-    margin-top: -16px
-    margin-right: 32px
-
-    &.wide
-      input
-        width: 150px
-
-    span
-      margin-right: 8px
-
-    input
-      background: $lightgrey
-      width: 66px
-      height: 66px
-      border: none
+    .scale-btns
+      position: fixed
+      right: 30px
+      top: 50%
+      transform: translateY(-50%)
+      width: 50px
+      height: 150px
+      background: $elem-grey
       border-radius: 8px
-      padding: 0
-      font-size: 40px
-      display: inline-block
-      vertical-align: middle
-      font-family: $SFD
-      font-weight: 200
-      text-align: center
 
-  .interface__btn
-    display: inline-block
-    margin-right: 32px
-    cursor: pointer
-    user-select: none
-    border-radius: 2px
-    flex-shrink: 0
+      .scale-btn__plus,
+      .scale-btn__minus
+        height: 75px
 
-    &:last-child
-      margin-right: 0
-
-    .btn__icon
-      width: 66px
-      height: 66px
-      padding: 20px
-      border-radius: 8px
-      &.big
-        width: 88px
-        &.icon-table
-          background-position-x: 52px
-        &.icon-decor2
-          background-size: 66px
-
-      &.icon-rotate
-        background: white url('../img/rotate.png') center no-repeat
-        background-size: 30px
-        &.right
-          transform: scaleX(-1)
-      &.icon-copy
-        background: white url('../img/copy.png') center no-repeat
-        background-size: 30px
-      &.icon-remove
-        background: white url('../img/trash.png') center no-repeat
-        background-size: 30px
-      &.icon-decor
-        background: white url('../img/decor.svg') center no-repeat
-        background-size: 44px
-      &.icon-barnchair
-        background: white url('../img/barnchair.svg') center no-repeat
-        background-size: 44px
-      &.icon-decor2
-        background: white url('../img/decor2.svg') center no-repeat
-        background-size: 44px
-      &.icon-table
-        background: $elem-grey url('../img/sofa.png') 30px 12px no-repeat
-        background-size: 16px
-        position: relative
-        .table-guest
-          position: absolute
-          top: 7px
-          right: 7px
-          font-weight: 200
-          font-size: 17px
+        &::before
+          display: block
+          text-align: center
+          font-size: 40px
           font-family: $SFD
-      &.icon-text
-        background: $elem-grey
-        text-align: center
-        font-size: 36px
-        line-height: .9
-      &.icon-line
-        background: white
-        position: relative
-        .line
-          position: absolute
-          width: 22px
-          height: 44px
-          top: 11px
-          left: 23px
-          border-radius: 50px
-          &.grey
-            background-color: $grey
-          &.brown
-            background-color: $brown
-          &.blue
-            background-color: $blue
+          line-height: 1.7
+          font-weight: 200
 
-    .btn__text
+      .scale-btn__plus
+        border-bottom: solid 1px $grey
+        &::before
+          content: '+'
+      .scale-btn__minus
+        &::before
+          content: '-'
+
+    .editor-menu, .element-menu
+      background: white
+      padding: 11px 30px
+      overflow: scroll
+      border-top: solid 1px $elem-grey
+      height: 110px
+
+    .editor-menu
+      white-space: nowrap
       text-align: center
-      font-weight: 300
-      margin-top: 5px
-      font-size: 10px
+
+    .element-menu
+      display: flex
+      align-items: center
+      justify-content: center
+
+    .interface__input
+      margin-top: -16px
+      margin-right: 32px
+
+      &.wide
+        input
+          width: 150px
+
+      span
+        margin-right: 8px
+
+      input
+        background: $lightgrey
+        width: 66px
+        height: 66px
+        border: none
+        border-radius: 8px
+        padding: 0
+        font-size: 40px
+        display: inline-block
+        vertical-align: middle
+        font-family: $SFD
+        font-weight: 200
+        text-align: center
+
+    .interface__btn
+      display: inline-block
+      margin-right: 32px
+      cursor: pointer
+      user-select: none
+      border-radius: 2px
+      flex-shrink: 0
+
+      &:last-child
+        margin-right: 0
+
+      .btn__icon
+        width: 66px
+        height: 66px
+        padding: 20px
+        border-radius: 8px
+        &.big
+          width: 88px
+          &.icon-table
+            background-position-x: 52px
+          &.icon-decor2
+            background-size: 66px
+
+        &.icon-rotate
+          background: white url('../img/rotate.png') center no-repeat
+          background-size: 30px
+          &.right
+            transform: scaleX(-1)
+        &.icon-copy
+          background: white url('../img/copy.png') center no-repeat
+          background-size: 30px
+        &.icon-remove
+          background: white url('../img/trash.png') center no-repeat
+          background-size: 30px
+        &.icon-decor
+          background: white url('../img/decor.svg') center no-repeat
+          background-size: 44px
+        &.icon-barnchair
+          background: white url('../img/barnchair.svg') center no-repeat
+          background-size: 44px
+        &.icon-decor2
+          background: white url('../img/decor2.svg') center no-repeat
+          background-size: 44px
+        &.icon-table
+          background: $elem-grey url('../img/sofa.png') 30px 12px no-repeat
+          background-size: 16px
+          position: relative
+          .table-guest
+            position: absolute
+            top: 7px
+            right: 7px
+            font-weight: 200
+            font-size: 17px
+            font-family: $SFD
+        &.icon-text
+          background: $elem-grey
+          text-align: center
+          font-size: 36px
+          line-height: .9
+        &.icon-line
+          background: white
+          position: relative
+          .line
+            position: absolute
+            width: 22px
+            height: 44px
+            top: 11px
+            left: 23px
+            border-radius: 50px
+            &.grey
+              background-color: $grey
+            &.brown
+              background-color: $brown
+            &.blue
+              background-color: $blue
+
+      .btn__text
+        text-align: center
+        font-weight: 300
+        margin-top: 5px
+        font-size: 10px
 
 .fade-enter-active, .fade-leave-active
   +transition()

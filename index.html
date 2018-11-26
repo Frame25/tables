@@ -3,11 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <title>Tables</title>
-  <link href="css/index.css?9511d160913c97e3500f" rel="stylesheet"></head>
+  <link href="css/index.css?008df4ef7fa49501dbd9" rel="stylesheet"></head>
   <body>
     <div id="app">
       <div id="drawing"></div>
       <div id="interface">
+        <div class="scale-btns">
+          <div class="scale-btn__plus" @click="$store.dispatch('changeScale', -3)"></div>
+          <div class="scale-btn__minus" @click="$store.dispatch('changeScale')"></div>
+        </div>
         <transition-group name="fade">
           <div class="editor-menu" v-if="$store.state.editorMenu" key="one">
             <div class="interface__btn add-table" @click="$store.dispatch('addTable')">
@@ -101,5 +105,5 @@
         </transition-group>
       </div>
     </div>
-  <script type="text/javascript" src="js/index.js?9511d160913c97e3500f"></script></body>
+  <script type="text/javascript" src="js/index.js?008df4ef7fa49501dbd9"></script></body>
 </html>

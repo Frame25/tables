@@ -13,7 +13,7 @@ store.state.d.click(() => {
 })
 
 // window.D = store.state.d
-// window.S = store
+window.S = store
 
 // ----------- IMPORT -->
 function importData (map) {
