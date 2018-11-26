@@ -33,7 +33,7 @@ const defs = {
     lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
     viewbox: {
         width: 1024,
-        height: 604
+        height: 658
     },
     table: {
         width: xGrid(3),
@@ -77,12 +77,21 @@ const defs = {
     }
 }
 
+const d = SVG('drawing').size('100%', '100%').viewbox(0, 0, defs.viewbox.width, defs.viewbox.height)
+const pattern = d.pattern(22, 22, add => {
+    add.rect(22, 22).fill('#ffffff')
+    add.circle(2).fill('#C8CBCC')
+})
+const patternRect = d.rect(100, 100).attr('restotype', 'pattern')
+
 // ------------------------------------------
 // THE STORE
 // ------------------------------------------
 const store = new Vuex.Store({
     state: {
-        d: SVG('drawing').size('100%', '100%').viewbox(0, 0, defs.viewbox.width, defs.viewbox.height),
+        d: d,
+        pattern: pattern,
+        patterRect: patternRect,
         selectedElement: null,
         selectedElementText: null,
         selectedElementGuests: null,
@@ -114,12 +123,8 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-        fillWithPattern ({ state }) {
-            const pattern = state.d.pattern(22, 22, add => {
-                add.rect(22, 22).fill('#ffffff')
-                add.circle(2).fill('#C8CBCC')
-            })
-            state.d.rect(2000, 2000).fill(pattern).dx(-300)
+        fillWithPattern ({ state }, {width = defs.viewbox.width, height = defs.viewbox.height} = {}) {
+            state.patterRect.width(width).height(height).fill(pattern)
         },
 
         // ----------- ELEMENTS` ACTIONS -->
@@ -280,7 +285,7 @@ const store = new Vuex.Store({
             let decor = state.d.image('img/' + type + '.png', type === 'decor2' ? xGrid(4) : xGrid(3), xGrid(3)).draggable(defs.dragOptions).move(...position).attr('restotype', type)
             dispatch('registerSelectElement', decor)
         },
-        changeScale ({ state }, num = 3) {
+        changeScale ({ state, dispatch }, num = 3) {
             let width = state.d.viewbox().width + xGrid(num)
             let height = width / 4 * 3
             // let height = state.d.viewbox().height + xGrid(num - 1)
@@ -288,7 +293,10 @@ const store = new Vuex.Store({
             if (width < defs.viewbox.width) width = defs.viewbox.width
             if (height < defs.viewbox.height) height = defs.viewbox.height
 
-            state.d.viewbox(0, 0, width, height - 164)
+            height -= 110
+
+            state.d.viewbox(0, 0, width, height)
+            dispatch('fillWithPattern', {width, height})
         },
 
         // ----------- EXPORT -->
