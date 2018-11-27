@@ -97,6 +97,7 @@ const store = new Vuex.Store({
         selectedElementGuests: null,
         editorMenu: true,
         elementMenu: false,
+        scaleMenu: false,
         tableCount: 1
     },
     mutations: {
@@ -114,6 +115,9 @@ const store = new Vuex.Store({
         },
         setElementMenu (state, val) {
             state.elementMenu = val
+        },
+        setScaleMenu (state, val) {
+            state.scaleMenu = val
         },
         increaseTable (state, minus) {
             if (minus)
@@ -161,10 +165,12 @@ const store = new Vuex.Store({
 
             commit('setElementMenu', true)
             commit('setEditorMenu', false)
+            commit('setScaleMenu', false)
         },
         unselectAll ({ state, commit, dispatch }) {
             commit('setSelectedEl', null)
             commit('setElementMenu', false)
+            commit('setScaleMenu', false)
             commit('setEditorMenu', true)
             state.d.each(function () {
                 this.selectize(false, {deepSelect: true}).resize(false)
@@ -295,6 +301,17 @@ const store = new Vuex.Store({
 
             state.d.viewbox(0, 0, width, height)
             dispatch('fillWithPattern', {width, height})
+        },
+        switchScaleMenu ({ commit }, val) {
+            if (val) {
+                commit('setElementMenu', false)
+                commit('setEditorMenu', false)
+                commit('setScaleMenu', true)
+            } else {
+                commit('setElementMenu', false)
+                commit('setScaleMenu', false)
+                commit('setEditorMenu', true)
+            }
         },
 
         // ----------- EXPORT -->

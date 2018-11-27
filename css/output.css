@@ -458,35 +458,7 @@ svg {
     -ms-flex-negative: 1;
         flex-shrink: 1;
     height: 110px; }
-    #app #interface .scale-btns {
-      position: fixed;
-      right: 11px;
-      top: 50%;
-      -webkit-transform: translateY(-50%);
-          -ms-transform: translateY(-50%);
-              transform: translateY(-50%);
-      width: 50px;
-      height: 150px;
-      background: #edf1f2;
-      border-radius: 8px; }
-      #app #interface .scale-btns .scale-btn__plus,
-      #app #interface .scale-btns .scale-btn__minus {
-        height: 75px; }
-        #app #interface .scale-btns .scale-btn__plus::before,
-        #app #interface .scale-btns .scale-btn__minus::before {
-          display: block;
-          text-align: center;
-          font-size: 40px;
-          font-family: SFD, Helvetica, Arial, sans-serif;
-          line-height: 1.7;
-          font-weight: 200; }
-      #app #interface .scale-btns .scale-btn__plus {
-        border-bottom: solid 1px #e1e5e6; }
-        #app #interface .scale-btns .scale-btn__plus::before {
-          content: '+'; }
-      #app #interface .scale-btns .scale-btn__minus::before {
-        content: '-'; }
-    #app #interface .editor-menu, #app #interface .element-menu {
+    #app #interface .editor-menu, #app #interface .element-menu, #app #interface .scale-menu {
       background: white;
       padding: 11px 30px;
       overflow: scroll;
@@ -496,6 +468,16 @@ svg {
       white-space: nowrap;
       text-align: center; }
     #app #interface .element-menu {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center; }
+    #app #interface .scale-menu {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -526,6 +508,11 @@ svg {
         text-align: center; }
         #app #interface .interface__input input:focus {
           outline: none; }
+    #app #interface .interface__text {
+      margin-right: 16px;
+      font-size: 14px;
+      font-weight: 300;
+      margin-top: -14px; }
     #app #interface .interface__btn {
       display: inline-block;
       margin-right: 32px;
@@ -539,17 +526,42 @@ svg {
           flex-shrink: 0; }
       #app #interface .interface__btn:last-child {
         margin-right: 0; }
+      #app #interface .interface__btn.scale-btn {
+        position: relative; }
+        #app #interface .interface__btn.scale-btn::after {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 2px;
+          height: 66px;
+          background: #f5f7f7;
+          top: 0;
+          right: -15px; }
+      #app #interface .interface__btn .text-btn {
+        width: auto;
+        height: 66px;
+        border-radius: 8px;
+        line-height: 1.6;
+        padding: 20px;
+        background: #f5f7f7;
+        font-size: 17px;
+        font-weight: 300;
+        margin-top: -17px; }
       #app #interface .interface__btn .btn__icon {
         width: 66px;
         height: 66px;
         padding: 20px;
-        border-radius: 8px; }
+        border-radius: 8px;
+        margin: 0 auto; }
         #app #interface .interface__btn .btn__icon.big {
           width: 88px; }
           #app #interface .interface__btn .btn__icon.big.icon-table {
             background-position-x: 52px; }
           #app #interface .interface__btn .btn__icon.big.icon-decor2 {
             background-size: 88px; }
+        #app #interface .interface__btn .btn__icon.icon-ruler {
+          background: #f5f7f7 url("../img/rulers.png") center no-repeat;
+          background-size: 30px; }
         #app #interface .interface__btn .btn__icon.icon-rotate {
           background: #f5f7f7 url("../img/rotate.png") center no-repeat;
           background-size: 30px; }
@@ -584,7 +596,7 @@ svg {
             font-size: 17px;
             font-family: SFD, Helvetica, Arial, sans-serif; }
         #app #interface .interface__btn .btn__icon.icon-text {
-          background: #edf1f2;
+          background: #f5f7f7;
           text-align: center;
           font-size: 24px;
           font-family: SFD, Helvetica, Arial, sans-serif;
@@ -605,6 +617,18 @@ svg {
               background-color: #ebd7ce; }
             #app #interface .interface__btn .btn__icon.icon-line .line.blue {
               background-color: #96d9fa; }
+        #app #interface .interface__btn .btn__icon.icon-right-plus {
+          background: #edf1f2 url("../img/right-plus.svg") center no-repeat;
+          background-size: 30px; }
+        #app #interface .interface__btn .btn__icon.icon-right-minus {
+          background: #edf1f2 url("../img/right-minus.svg") center no-repeat;
+          background-size: 30px; }
+        #app #interface .interface__btn .btn__icon.icon-bottom-plus {
+          background: #edf1f2 url("../img/bottom-plus.svg") center no-repeat;
+          background-size: 22px; }
+        #app #interface .interface__btn .btn__icon.icon-bottom-minus {
+          background: #edf1f2 url("../img/bottom-minus.svg") center no-repeat;
+          background-size: 22px; }
       #app #interface .interface__btn .btn__text {
         text-align: center;
         font-weight: 300;

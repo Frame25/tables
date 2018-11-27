@@ -53,37 +53,7 @@ svg
     flex-shrink: 1
     height: 110px
 
-    .scale-btns
-      position: fixed
-      right: 11px
-      top: 50%
-      transform: translateY(-50%)
-      width: 50px
-      height: 150px
-      background: $elem-grey
-      border-radius: 8px
-
-      .scale-btn__plus,
-      .scale-btn__minus
-        height: 75px
-
-        &::before
-          display: block
-          text-align: center
-          font-size: 40px
-          font-family: $SFD
-          line-height: 1.7
-          font-weight: 200
-
-      .scale-btn__plus
-        border-bottom: solid 1px $grey
-        &::before
-          content: '+'
-      .scale-btn__minus
-        &::before
-          content: '-'
-
-    .editor-menu, .element-menu
+    .editor-menu, .element-menu, .scale-menu
       background: white
       padding: 11px 30px
       overflow: scroll
@@ -95,6 +65,11 @@ svg
       text-align: center
 
     .element-menu
+      display: flex
+      align-items: center
+      justify-content: center
+
+    .scale-menu
       display: flex
       align-items: center
       justify-content: center
@@ -126,6 +101,12 @@ svg
         &:focus
           outline: none
 
+    .interface__text
+      margin-right: 16px
+      font-size: 14px
+      font-weight: 300
+      margin-top: -14px
+
     .interface__btn
       display: inline-block
       margin-right: 32px
@@ -137,17 +118,46 @@ svg
       &:last-child
         margin-right: 0
 
+      &.scale-btn
+        position: relative
+        &::after
+          content: ''
+          position: absolute
+          display: block
+          width: 2px
+          height: 66px
+          background: $lightgrey
+          top: 0
+          right: -15px
+
+
+      .text-btn
+        width: auto
+        height: 66px
+        border-radius: 8px
+        line-height: 1.6
+        padding: 20px
+        background: $lightgrey
+        font-size: 17px
+        font-weight: 300
+        margin-top: -17px
+
       .btn__icon
         width: 66px
         height: 66px
         padding: 20px
         border-radius: 8px
+        margin: 0 auto
         &.big
           width: 88px
           &.icon-table
             background-position-x: 52px
           &.icon-decor2
             background-size: 88px
+
+        &.icon-ruler
+          background: $lightgrey url('../img/rulers.png') center no-repeat
+          background-size: 30px
 
         &.icon-rotate
           background: $lightgrey url('../img/rotate.png') center no-repeat
@@ -181,7 +191,7 @@ svg
             font-size: 17px
             font-family: $SFD
         &.icon-text
-          background: $elem-grey
+          background: $lightgrey
           text-align: center
           font-size: 24px
           font-family: $SFD
@@ -202,6 +212,17 @@ svg
               background-color: $brown
             &.blue
               background-color: $blue
+        @each $name in ('right-plus', 'right-minus', 'bottom-plus', 'bottom-minus')
+          &.icon-#{$name}
+            background: $elem-grey url('../img/#{$name}.svg') center no-repeat
+            @if $name == 'right-plus'
+              background-size: 30px
+            @else if $name == 'right-minus'
+              background-size: 30px
+            @else if $name == 'bottom-plus'
+              background-size: 22px
+            @else if $name == 'bottom-minus'
+              background-size: 22px
 
       .btn__text
         text-align: center

@@ -8,9 +8,28 @@ html(lang="en")
     #app
       #drawing
       #interface
-
         transition-group(name="fade")
+          .scale-menu(v-if="$store.state.scaleMenu" key="three")
+            .interface__text Рабочая область
+            .interface__btn.right-plus(@click="$store.dispatch('changeScale', {dx: 3})")
+              .btn__icon.icon-right-plus
+              .btn__text Добавить справа
+            .interface__btn.right-minus(@click="$store.dispatch('changeScale', {dx: -3})")
+              .btn__icon.icon-right-minus
+              .btn__text Убрать справа
+            .interface__btn.bottom-plus(@click="$store.dispatch('changeScale', {dy: 3})")
+              .btn__icon.icon-bottom-plus
+              .btn__text Добавить снизу
+            .interface__btn.bottom-minus(@click="$store.dispatch('changeScale', {dy: -3})")
+              .btn__icon.icon-bottom-minus
+              .btn__text Убрать снизу
+            .interface__btn(@click="$store.dispatch('switchScaleMenu', false)")
+              .text-btn Готово
+
           .editor-menu(v-if="$store.state.editorMenu" key="one")
+            .interface__btn.scale-btn(@click="$store.dispatch('switchScaleMenu', true)")
+              .btn__icon.icon-ruler
+              .btn__text Рабочая область
             .interface__btn.add-table(@click="$store.dispatch('addTable')")
               .btn__icon.icon-table
                 .table-guest 2
@@ -53,7 +72,6 @@ html(lang="en")
             .interface__btn.clear(@click="$store.dispatch('clearAll')")
               .btn__icon.icon-text Оч
               .btn__text Очистить
-
 
           .element-menu(v-if="$store.state.elementMenu && $store.state.selectedElement" key="two")
             .interface__input.table-number(v-if="$store.state.selectedElement.attr('restotype') === 'table'")
