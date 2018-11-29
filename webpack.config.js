@@ -7,7 +7,7 @@ const sorting = require('postcss-sorting')
 const build = {
   entry: {
     index: path.resolve(__dirname, 'src/pages/index.js'),
-    output: path.resolve(__dirname, 'src/pages/output.js')
+    output: path.resolve(__dirname, 'src/pages/output.js'),
   },
   output: {
     path: path.resolve(__dirname, './'),
@@ -22,7 +22,7 @@ const build = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },

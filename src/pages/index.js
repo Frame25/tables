@@ -1,115 +1,142 @@
 import 'normalize.css'
 import '../sass/style.sass'
 import '../libs/select/select.css'
-import Vue from 'vue'
-import store from '../store/index'
+import DrawingClass from '../components/drawing-class'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-// ------------------------------------------
-// NO VUE LOGIC
-// ------------------------------------------
-store.dispatch('fillWithPattern')
-store.state.d.click(() => {
-    store.dispatch('unselectAll')
-})
+import EditorMenu from '../components/editor-menu'
+import ElementMenu from '../components/element-menu'
+import ScaleMenu from '../components/scale-menu'
 
-// window.D = store.state.d
-window.S = store
+class Interface extends React.Component {
+    constructor (props) {
+        super(props)
 
-// ----------- IMPORT -->
-function importData (map) {
-    if (map) {
-        let json = typeof map === 'string' ? JSON.parse(map) : map
-        store.state.d.viewbox(0, 0, json.width, json.height)
-        if (json.elements && json.elements.length) {
-            json.elements.forEach(el => {
-                switch (el.type) {
-                    case 'table':
-                        store.dispatch('addTable', {
-                            position: [el.x, el.y],
-                            number: el.number,
-                            guests: el.guests
-                        })
-                        break
-                    case 'text':
-                        store.dispatch('addText', {
-                            text: el.text,
-                            position: [el.x, el.y]
-                        })
-                        break
-                    case 'wall':
-                        store.dispatch('addWall', {
-                            dots: el.dots
-                        })
-                        break
+        this.state = {
+            D: new DrawingClass({ id: 'drawing', mode: 'edit', clickCallback: this.clickCallback.bind(this) }),
+            selectedElement: null,
+            selectedText: null,
+            selectedGuests: null,
 
-                    case 'bar':
-                        store.dispatch('addBar', {
-                            dots: el.dots
-                        })
-                        break
-                    case 'glass':
-                        store.dispatch('addGlass', {
-                            dots: el.dots
-                        })
-                        break
-                    case 'decor':
-                        store.dispatch('addDecor', {
-                            position: [el.x, el.y]
-                        })
-                        break
-                    case 'decor2':
-                        store.dispatch('addDecor2', {
-                            position: [el.x, el.y]
-                        })
-                        break
-                    case 'barnchair':
-                        store.dispatch('addBarnchair', {
-                            position: [el.x, el.y]
-                        })
-                        break
+            editorMenu: true,
+            elementMenu: false,
+            scaleMenu: false
+        }
 
-                }
+        this.setEditorMenu = () => {
+            this.setState({
+                editorMenu: true,
+                elementMenu: false,
+                scaleMenu: false
             })
         }
+        this.setElementMenu = () => {
+            this.setState({
+                editorMenu: false,
+                elementMenu: true,
+                scaleMenu: false
+            })
+        }
+        this.setScaleMenu = () => {
+            this.setState({
+                editorMenu: false,
+                elementMenu: false,
+                scaleMenu: true
+            })
+        }
+        this.setSelectedElement = (el) => {
+            this.setState({selectedElement: el})
+        }
+        this.setSelectedText = (el) => {
+            this.setState({selectedText: el})
+        }
+        this.setSelectedGuests = (el) => {
+            this.setState({selectedGuests: el})
+        }
+    }
+
+    clickCallback (el) {
+        this.selectElement(el)
+    }
+
+    selectElement (elem) {
+        event.stopPropagation()
+        this.unselectAll()
+        this.setSelectedElement(elem)
+
+        // select
+        if (elem.type === 'line') elem.selectize(this.state.D.defs.selectOptionsLine).resize(this.state.D.defs.resizeOptions)
+        else elem.addClass(this.state.D.defs.selectClass)
+
+        // selected element text
+        if (elem.attr().restotype === 'table') {
+            this.state.selectedText = elem.select('.table-num').first().text()
+            this.state.selectedGuests = elem.select('.guests-num').first().text()
+        }
+        if (elem.type === 'text') this.state.selectedText = elem.text()
+
+        // drag
+        if (elem.type === 'line') elem.draggable(this.state.D.defs.dragOptions)
+        else elem.draggable(this.state.D.defs.dragOptions2)
+
+        this.setElementMenu()
+    }
+
+    unselectAll () {
+        this.setEditorMenu()
+        this.setSelectedElement(null)
+
+        let that = this
+        this.state.D.svg.each(function () {
+            this.selectize(false, {deepSelect: true}).resize(false)
+            if (this.hasClass(that.state.D.defs.selectClass)) this.removeClass(that.state.D.defs.selectClass)
+        })
+    }
+
+    parentCallback (callback) {
+        let that = this
+        callback(that)
+    }
+
+    componentDidMount () {
+        window.D = this.state.D
+        this.state.D.svg.click(() => {
+            this.unselectAll()
+        })
+        this.state.D.fillWithPattern()
+    }
+
+    render () {
+        return (
+            <ReactCSSTransitionGroup
+                transitionName="fade"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+                >
+                {
+                    this.state.elementMenu ?
+                        <ElementMenu
+                            D={this.state.D}
+                            element={this.state.selectedElement}
+                            selectedText={this.state.selectedText}
+                            selectedGuests={this.state.selectedGuests}
+                            selectElement={this.selectElement.bind(this)}
+                            unselectAll={this.unselectAll.bind(this)}
+                            setText={this.setSelectedText}
+                            setEl={this.setSelectedElement}
+                            setGuests={this.setSelectedGuests}
+                            parentCallback={this.parentCallback.bind(this)}
+                            key="1"
+                        />
+                        : this.state.scaleMenu ?
+                        <ScaleMenu D={this.state.D} openEditorMenu={this.setEditorMenu} key="2" /> :
+                        <EditorMenu D={this.state.D} openScaleMenu={this.setScaleMenu} key="3" />
+                }
+            </ReactCSSTransitionGroup>
+        )
     }
 }
 
-window.importData = importData
-
-// ------------------------------------------
-// ACTIONS INTERFACE
-// ------------------------------------------
-new Vue({
-    el: '#interface',
-    store,
-    data: {
-        elementText: '',
-        tableNum: '',
-        guestNum: ''
-    },
-    methods: {
-        elementTextSend (val) {
-            this.$store.dispatch('changeText', this.elementText)
-        },
-        tableNumSend (val) {
-            this.tableNum = this.tableNum.replace(/\D+/g, '').slice(0,2)
-            this.$store.dispatch('changeText', this.tableNum)
-        },
-        guestNumSend (val) {
-            this.guestNum = this.guestNum.replace(/\D+/g, '').slice(0,1)
-            this.$store.dispatch('changeGuestNum', this.guestNum)
-        }
-    },
-    mounted () {
-        
-        this.$store.subscribe((mutation, state) => {
-            this.$forceUpdate()
-            this.elementText = this.$store.state.selectedElementText
-            this.tableNum = this.$store.state.selectedElementText
-            this.guestNum = this.$store.state.selectedElementGuests
-        })
-        this.$store.subscribeAction((action, state) => {
-            this.$forceUpdate()
-        })
-    }
-})
+ReactDOM.render(<Interface/>, document.getElementById('interface'))

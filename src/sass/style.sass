@@ -231,13 +231,16 @@ svg
         font-size: 10px
         //color: $btn-text
 
-.fade-enter-active, .fade-leave-active
-  +transition()
-.fade-enter, .fade-leave-to
+.fade-enter
   opacity: 0
 
-.fade-up-enter-active, .fade-up-leave-active
-  +transition()
-.fade-up-enter, .fade-up-leave-to
+.fade-enter.fade-enter-active
+  opacity: 1
+  +transition
+
+.fade-leave
+  opacity: 1
+
+.fade-leave.fade-leave-active
   opacity: 0
-  transform: translateY(-30px)
+  +transition

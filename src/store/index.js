@@ -91,7 +91,7 @@ const store = new Vuex.Store({
     state: {
         d: d,
         pattern: pattern,
-        patterRect: patternRect,
+        patternRect: patternRect,
         selectedElement: null,
         selectedElementText: null,
         selectedElementGuests: null,
@@ -128,7 +128,7 @@ const store = new Vuex.Store({
     },
     actions: {
         fillWithPattern ({ state }, {width = defs.viewbox.width, height = defs.viewbox.height} = {}) {
-            state.patterRect.width(width).height(height).fill(pattern)
+            state.patternRect.width(width).height(height).fill(pattern)
         },
 
         // ----------- ELEMENTS` ACTIONS -->
@@ -336,7 +336,8 @@ const store = new Vuex.Store({
                             x: this.x(),
                             y: this.y(),
                             number: this.select('.table-num').first().text(),
-                            guests: this.select('.guests-num').first().text()
+                            guests: this.select('.guests-num').first().text(),
+                            transform: this.transform()
                         })
                         break
                     case 'text':
@@ -344,46 +345,53 @@ const store = new Vuex.Store({
                             type,
                             x: this.x(),
                             y: this.y(),
-                            text: this.text()
+                            text: this.text(),
+                            transform: this.transform()
                         })
                         break
                     case 'wall':
                         expData.elements.push({
                             type,
-                            dots: this.array().value
+                            dots: this.array().value,
+                            transform: this.transform()
                         })
                         break
                     case 'bar':
                         expData.elements.push({
                             type,
-                            dots: this.array().value
+                            dots: this.array().value,
+                            transform: this.transform()
                         })
                         break
                     case 'glass':
                         expData.elements.push({
                             type,
-                            dots: this.array().value
+                            dots: this.array().value,
+                            transform: this.transform()
                         })
                         break
                     case 'decor':
                         expData.elements.push({
                             type,
                             x: this.x(),
-                            y: this.y()
+                            y: this.y(),
+                            transform: this.transform()
                         })
                         break
                     case 'decor2':
                         expData.elements.push({
                             type,
                             x: this.x(),
-                            y: this.y()
+                            y: this.y(),
+                            transform: this.transform()
                         })
                         break
                     case 'barnchair':
                         expData.elements.push({
                             type,
                             x: this.x(),
-                            y: this.y()
+                            y: this.y(),
+                            transform: this.transform()
                         })
                         break
 
