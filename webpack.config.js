@@ -94,13 +94,7 @@ const build = {
     new ExtractTextPlugin({
       filename: 'css/[name].css?[hash]'
     })
-  ],
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
-    extensions: ['*', '.js', '.jsx', '.vue', '.json']
-  }
+  ]
 }
 
 const dev = {
