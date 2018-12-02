@@ -244,3 +244,14 @@ svg
 .fade-leave.fade-leave-active
   opacity: 0
   +transition
+
+
+@media screen and (max-width: 767px)
+  #app
+    #drawing
+      overflow: scroll
+      svg
+        min-width: 100px
+    #interface
+      .editor-menu, .element-menu, .scale-menu
+        justify-content: flex-start
