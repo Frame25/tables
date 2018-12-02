@@ -489,7 +489,10 @@ svg {
               justify-content: center; }
     #app #interface .interface__input {
       margin-top: -16px;
-      margin-right: 32px; }
+      margin-right: 32px;
+      min-width: 180px; }
+      #app #interface .interface__input.wide {
+        min-width: 210px; }
       #app #interface .interface__input.wide input {
         width: 150px; }
       #app #interface .interface__input span {
