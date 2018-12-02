@@ -715,7 +715,7 @@ svg {
   #app #drawing {
     overflow: scroll; }
     #app #drawing svg {
-      min-width: 100px; }
+      min-width: 1000px; }
   #app #interface .editor-menu, #app #interface .element-menu, #app #interface .scale-menu {
     -webkit-box-pack: start;
         -ms-flex-pack: start;
