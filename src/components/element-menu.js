@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 
-let log = console.log
 export default class ElementMenu extends Component {
     constructor (props) {
         super(props)
@@ -65,11 +64,8 @@ export default class ElementMenu extends Component {
             if (text === '') text = '1'
             text = text.slice(0,1)
             this.props.element.select('.guests-num').first().text(text)
+            this.props.setGuests(text)
         }
-    }
-
-    componentWillUpdate () {
-        console.log(this.txt)
     }
 
     render () {

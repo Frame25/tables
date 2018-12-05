@@ -10,6 +10,8 @@ import EditorMenu from '../components/editor-menu'
 import ElementMenu from '../components/element-menu'
 import ScaleMenu from '../components/scale-menu'
 
+let log = console.log
+
 class Interface extends React.Component {
     constructor (props) {
         super(props)
@@ -49,11 +51,11 @@ class Interface extends React.Component {
         this.setSelectedElement = (el) => {
             this.setState({selectedElement: el})
         }
-        this.setSelectedText = (el) => {
-            this.setState({selectedText: el})
+        this.setSelectedText = (text) => {
+            this.setState({selectedText: text})
         }
-        this.setSelectedGuests = (el) => {
-            this.setState({selectedGuests: el})
+        this.setSelectedGuests = (num) => {
+            this.setState({selectedGuests: num})
         }
     }
 
@@ -63,25 +65,30 @@ class Interface extends React.Component {
 
     selectElement (elem) {
         event.stopPropagation()
-        this.unselectAll()
-        this.setSelectedElement(elem)
+        if (!this.state.selectedElement || elem.id() !== this.state.selectedElement.id()) {
+            this.unselectAll()
+            this.setSelectedElement(elem)
 
-        // select
-        if (elem.type === 'line') elem.selectize(this.state.D.defs.selectOptionsLine).resize(this.state.D.defs.resizeOptions)
-        else elem.addClass(this.state.D.defs.selectClass)
+            // select
+            if (elem.type === 'line') elem.selectize(this.state.D.defs.selectOptionsLine).resize(this.state.D.defs.resizeOptions)
+            else elem.addClass(this.state.D.defs.selectClass)
 
-        // selected element text
-        if (elem.attr().restotype === 'table') {
-            this.state.selectedText = elem.select('.table-num').first().text()
-            this.state.selectedGuests = elem.select('.guests-num').first().text()
+            // selected element text
+            if (elem.attr().restotype === 'table') {
+                this.setSelectedText(elem.select('.table-num').first().text())
+                this.setSelectedGuests(elem.select('.guests-num').first().text())
+            }
+            if (elem.type === 'text') {
+                log('type text, set ', elem.text())
+                this.setSelectedText(elem.text())
+            }
+
+            // drag
+            if (elem.type === 'line') elem.draggable(this.state.D.defs.dragOptions)
+            else elem.draggable(this.state.D.defs.dragOptions2)
+
+            this.setElementMenu()
         }
-        if (elem.type === 'text') this.state.selectedText = elem.text()
-
-        // drag
-        if (elem.type === 'line') elem.draggable(this.state.D.defs.dragOptions)
-        else elem.draggable(this.state.D.defs.dragOptions2)
-
-        this.setElementMenu()
     }
 
     unselectAll () {
@@ -101,11 +108,14 @@ class Interface extends React.Component {
     }
 
     componentDidMount () {
-        window.D = this.state.D
-        this.state.D.svg.click(() => {
-            this.unselectAll()
-        })
-        this.state.D.fillWithPattern()
+        // window.D = this.state.D
+        if (!window.interface_listeners_set) {
+            window.interface_listeners_set = true
+            this.state.D.svg.click(() => {
+                this.unselectAll()
+            })
+            this.state.D.fillWithPattern()
+        }
     }
 
     render () {
@@ -113,7 +123,7 @@ class Interface extends React.Component {
             <ReactCSSTransitionGroup
                 transitionName="fade"
                 transitionEnterTimeout={300}
-                transitionLeaveTimeout={300}
+                transitionLeaveTimeout={10}
                 >
                 {
                     this.state.elementMenu ?
@@ -125,9 +135,8 @@ class Interface extends React.Component {
                             selectElement={this.selectElement.bind(this)}
                             unselectAll={this.unselectAll.bind(this)}
                             setText={this.setSelectedText}
-                            setEl={this.setSelectedElement}
                             setGuests={this.setSelectedGuests}
-                            parentCallback={this.parentCallback.bind(this)}
+                            setEl={this.setSelectedElement}
                             key="1"
                         />
                         : this.state.scaleMenu ?
