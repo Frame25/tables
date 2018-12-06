@@ -17,6 +17,12 @@ import defs from './defs.js'
 
 function defCallback () { console.log('click callback') }
 
+let sw = window.screen.width
+let small = sw <= 768
+if (small) {
+    window.addEventListener('load', () => {document.querySelector('svg').parentNode.scrollTo(defs.xGrid(15), defs.xGrid(15))})
+}
+
 export default class Drawing {
     constructor ({
                      id = 'drawing',
@@ -26,7 +32,7 @@ export default class Drawing {
         this.defs = defs
         this.mode = mode
         this.clickCallback = clickCallback
-        this.svg = SVG(id).size('100%', '100%').viewbox(0, 0, defs.viewbox.width, defs.viewbox.height)
+        this.svg = SVG(id).size(small ? defs.viewbox.width : '100%', small ? defs.viewbox.height : '100%').viewbox(0, 0, defs.viewbox.width, defs.viewbox.height)
         // this._tableCount = 1
         this._tableNum = 0
         this.pattern = this.svg.pattern(22, 22, add => {
