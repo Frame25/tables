@@ -1,0 +1,82 @@
+// ---------------------------------------
+// FONTS
+// ---------------------------------------
+$SF: SF, Helvetica, Arial, sans-serif
+$SFD: SFD, Helvetica, Arial, sans-serif
+
+
+// ---------------------------------------
+// COLORS
+// ---------------------------------------
+$lightgrey: #f5f7f7
+$grey: #e1e5e6
+$blue: #96d9fa
+$selected-table: #44b2cc
+$brown: #ebd7ce
+$elem-grey: #edf1f2
+$blue-grey: #8FACB3
+$text-grey: #646666
+$btn-text: #969899
+
+
+// ---------------------------------------
+// GRADIENT
+// ---------------------------------------
+=action-gradient($type: '', $angle: false)
+  @if $type == 'main'
+    background: #dae3f2
+    background: linear-gradient(if(not $angle, 29deg, $angle), white, #dae3f2) no-repeat
+  @else if $type == 'red'
+    background: #cc6666
+    background: linear-gradient(if(not $angle, 125deg, $angle), #cc6666, #669ccc) no-repeat
+  @else
+    background: #66ccb6
+    background: linear-gradient(if(not $angle, 125deg, $angle), #66ccb6, #669ccc) no-repeat
+
+// ---------------------------------------
+// BREAKPOINTS
+// ---------------------------------------
+$desktop: 1200px
+$desktop-small: 1024px
+$tablet: 768px
+$mobile-sm: 320px
+
+// ---------------------------------------
+// TRANSITIONS
+// ---------------------------------------
+$main-timing-func: cubic-bezier(0.25, 0.1, 0.25, 1)
+$fast-timing-func: cubic-bezier(0, 1.1, 0.25, 1)
+
+=transition($property: all, $duration: .3s, $function: $main-timing-func, $delay: 0s)
+  $prop: $property
+  $dur: $duration
+  $func: $function
+  $del: $delay
+  @for $i from 1 to length($property)
+    @if length($dur) == 1
+      $dur: $dur, $duration
+    @if length($func) == 1
+      $func: $func, $function
+    @if length($func) == 1
+      $del: $del, $delay
+  transition-property: $prop
+  transition-duration: $dur
+  transition-timing-function: $func
+  transition-delay: $del
+
+// ---------------------------------------
+// HOVER
+// ---------------------------------------
+=main-box-shadow($mini: '')
+  @if $mini == 'mini'
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1)
+  @else
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.15)
+
+=main-card-hover($mini)
+  @if $mini == 'mini'
+    +main-box-shadow($mini)
+    transform: scale(1.03)
+  @else
+    +main-box-shadow()
+    transform: scale(1.03)
