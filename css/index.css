@@ -467,10 +467,12 @@ svg {
 #app {
   width: 100%;
   height: 100%;
-  height: 100vh; }
+  height: 100vh;
+  overflow: hidden; }
   #app #drawing {
     height: calc(100vh - 110px);
-    width: 100%; }
+    width: 100%;
+    position: relative; }
     #app #drawing .svg_select_points_point {
       fill: white;
       stroke: #96d9fa;
@@ -489,7 +491,9 @@ svg {
     #app #drawing .selected-table text {
       fill: white; }
   #app #interface {
-    height: 110px; }
+    height: 110px;
+    position: relative;
+    z-index: 10; }
     #app #interface .editor-menu, #app #interface .element-menu, #app #interface .scale-menu {
       background: white;
       padding: 11px 30px;

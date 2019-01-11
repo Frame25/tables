@@ -15,16 +15,12 @@ svg
   width: 100%
   height: 100%
   height: 100vh
-  //overflow: hidden
-  //display: flex
-  //flex-direction: column
+  overflow: hidden
 
   #drawing
-    //border: solid 1px lightgrey
-    //margin: 5px
     height: calc(100vh - 110px)
     width: 100%
-    //overflow: hidden
+    position: relative
 
     .svg_select_points_point
       fill: white
@@ -52,6 +48,8 @@ svg
 
   #interface
     height: 110px
+    position: relative
+    z-index: 10
 
     .editor-menu, .element-menu, .scale-menu
       background: white
