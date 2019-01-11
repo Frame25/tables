@@ -16,8 +16,8 @@ export default {
   startPos: [defX, defY],
   lineStartDots: [ [defX, defY], [xGrid(27), defY] ],
   viewbox: {
-    width: 1224,
-    height: 758
+    width: 1024,
+    height: 600
   },
   table: {
     width: xGrid(3),
