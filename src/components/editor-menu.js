@@ -65,11 +65,11 @@ export default class EditorMenu extends Component {
                     <div className="btn__text">Мега-декор</div>
                 </div>
                 <div className="interface__btn export" onClick={() => this.props.D.exportData()}>
-                    <div className="btn__icon icon-text">Ээ</div>
+                    <div className="btn__icon icon-text">Э</div>
                     <div className="btn__text">Экспорт</div>
                 </div>
                 <div className="interface__btn clear">
-                    <div className="btn__icon icon-text" onClick={() => this.props.D.clearAll()}>Оч</div>
+                    <div className="btn__icon icon-text" onClick={() => this.props.D.clearAll()}>О</div>
                     <div className="btn__text">Очистить</div>
                 </div>
             </div>
