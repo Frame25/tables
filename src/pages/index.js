@@ -7,9 +7,9 @@ import ReactDOM from 'react-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { CSSTransitionGroup } from 'react-transition-group'
 
-import EditorMenu from '../components/editor-menu'
-import ElementMenu from '../components/element-menu'
-import ScaleMenu from '../components/scale-menu'
+import EditorMenu from '../components/EditorMenu'
+import ElementMenu from '../components/ElementMenu'
+import ScaleMenu from '../components/ScaleMenu'
 
 
 let ev = new Event('selectelement')
@@ -85,9 +85,7 @@ class Interface extends React.Component {
       })
       this.state.D.fillWithPattern()
     }
-    window.importData = map => {
-      this.state.D.importData(map)
-    }
+    window.importData = map => this.state.D.importData(map)
   }
 
   render () {
@@ -97,6 +95,7 @@ class Interface extends React.Component {
         transitionEnterTimeout={300}
         transitionLeaveTimeout={10}
         component="div"
+        className="interfaces-wrapper"
       >
         {
           this.state.elementMenu ?

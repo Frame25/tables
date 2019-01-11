@@ -450,20 +450,21 @@ svg {
       fill: #44b2cc; }
     #app #drawing .selected-table text {
       fill: white; }
-  #app #interface {
+  #app #interface, #app .interfaces-wrapper {
     height: 110px;
     position: relative;
-    z-index: 10; }
-    #app #interface .editor-menu, #app #interface .element-menu, #app #interface .scale-menu {
+    z-index: 10;
+    background: white; }
+    #app #interface .editor-menu, #app #interface .element-menu, #app #interface .scale-menu, #app .interfaces-wrapper .editor-menu, #app .interfaces-wrapper .element-menu, #app .interfaces-wrapper .scale-menu {
       background: white;
       padding: 11px 30px;
       overflow: scroll;
       border-top: solid 1px #edf1f2;
       height: 110px; }
-    #app #interface .editor-menu {
+    #app #interface .editor-menu, #app .interfaces-wrapper .editor-menu {
       white-space: nowrap;
       text-align: center; }
-    #app #interface .element-menu {
+    #app #interface .element-menu, #app .interfaces-wrapper .element-menu {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -473,7 +474,7 @@ svg {
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center; }
-    #app #interface .scale-menu {
+    #app #interface .scale-menu, #app .interfaces-wrapper .scale-menu {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -483,17 +484,17 @@ svg {
       -webkit-box-pack: center;
           -ms-flex-pack: center;
               justify-content: center; }
-    #app #interface .interface__input {
+    #app #interface .interface__input, #app .interfaces-wrapper .interface__input {
       margin-top: -16px;
       margin-right: 32px;
       min-width: 180px; }
-      #app #interface .interface__input.wide {
+      #app #interface .interface__input.wide, #app .interfaces-wrapper .interface__input.wide {
         min-width: 210px; }
-      #app #interface .interface__input.wide input {
+      #app #interface .interface__input.wide input, #app .interfaces-wrapper .interface__input.wide input {
         width: 150px; }
-      #app #interface .interface__input span {
+      #app #interface .interface__input span, #app .interfaces-wrapper .interface__input span {
         margin-right: 8px; }
-      #app #interface .interface__input input {
+      #app #interface .interface__input input, #app .interfaces-wrapper .interface__input input {
         width: 66px;
         height: 66px;
         border: solid 1px #e1e5e6;
@@ -505,14 +506,14 @@ svg {
         font-family: SFD, Helvetica, Arial, sans-serif;
         font-weight: 200;
         text-align: center; }
-        #app #interface .interface__input input:focus {
+        #app #interface .interface__input input:focus, #app .interfaces-wrapper .interface__input input:focus {
           outline: none; }
-    #app #interface .interface__text {
+    #app #interface .interface__text, #app .interfaces-wrapper .interface__text {
       margin-right: 16px;
       font-size: 14px;
       font-weight: 300;
       margin-top: -14px; }
-    #app #interface .interface__btn {
+    #app #interface .interface__btn, #app .interfaces-wrapper .interface__btn {
       display: inline-block;
       margin-right: 32px;
       cursor: pointer;
@@ -523,11 +524,11 @@ svg {
       border-radius: 2px;
       -ms-flex-negative: 0;
           flex-shrink: 0; }
-      #app #interface .interface__btn:last-child {
+      #app #interface .interface__btn:last-child, #app .interfaces-wrapper .interface__btn:last-child {
         margin-right: 0; }
-      #app #interface .interface__btn.scale-btn {
+      #app #interface .interface__btn.scale-btn, #app .interfaces-wrapper .interface__btn.scale-btn {
         position: relative; }
-        #app #interface .interface__btn.scale-btn::after {
+        #app #interface .interface__btn.scale-btn::after, #app .interfaces-wrapper .interface__btn.scale-btn::after {
           content: '';
           position: absolute;
           display: block;
@@ -536,7 +537,7 @@ svg {
           background: #f5f7f7;
           top: 0;
           right: -15px; }
-      #app #interface .interface__btn .text-btn {
+      #app #interface .interface__btn .text-btn, #app .interfaces-wrapper .interface__btn .text-btn {
         width: auto;
         height: 66px;
         border-radius: 8px;
@@ -546,89 +547,89 @@ svg {
         font-size: 17px;
         font-weight: 300;
         margin-top: -17px; }
-      #app #interface .interface__btn .btn__icon {
+      #app #interface .interface__btn .btn__icon, #app .interfaces-wrapper .interface__btn .btn__icon {
         width: 66px;
         height: 66px;
         padding: 20px;
         border-radius: 8px;
         margin: 0 auto; }
-        #app #interface .interface__btn .btn__icon.big {
+        #app #interface .interface__btn .btn__icon.big, #app .interfaces-wrapper .interface__btn .btn__icon.big {
           width: 88px; }
-          #app #interface .interface__btn .btn__icon.big.icon-table {
+          #app #interface .interface__btn .btn__icon.big.icon-table, #app .interfaces-wrapper .interface__btn .btn__icon.big.icon-table {
             background-position-x: 52px; }
-          #app #interface .interface__btn .btn__icon.big.icon-decor2 {
+          #app #interface .interface__btn .btn__icon.big.icon-decor2, #app .interfaces-wrapper .interface__btn .btn__icon.big.icon-decor2 {
             background-size: 88px; }
-        #app #interface .interface__btn .btn__icon.icon-ruler {
+        #app #interface .interface__btn .btn__icon.icon-ruler, #app .interfaces-wrapper .interface__btn .btn__icon.icon-ruler {
           background: #f5f7f7 url("../img/rulers.png") center no-repeat;
           background-size: 30px; }
-        #app #interface .interface__btn .btn__icon.icon-rotate {
+        #app #interface .interface__btn .btn__icon.icon-rotate, #app .interfaces-wrapper .interface__btn .btn__icon.icon-rotate {
           background: #f5f7f7 url("../img/rotate.png") center no-repeat;
           background-size: 30px; }
-          #app #interface .interface__btn .btn__icon.icon-rotate.right {
+          #app #interface .interface__btn .btn__icon.icon-rotate.right, #app .interfaces-wrapper .interface__btn .btn__icon.icon-rotate.right {
             -webkit-transform: scaleX(-1);
                 -ms-transform: scaleX(-1);
                     transform: scaleX(-1); }
-        #app #interface .interface__btn .btn__icon.icon-copy {
+        #app #interface .interface__btn .btn__icon.icon-copy, #app .interfaces-wrapper .interface__btn .btn__icon.icon-copy {
           background: #f5f7f7 url("../img/copy.png") center no-repeat;
           background-size: 30px; }
-        #app #interface .interface__btn .btn__icon.icon-remove {
+        #app #interface .interface__btn .btn__icon.icon-remove, #app .interfaces-wrapper .interface__btn .btn__icon.icon-remove {
           background: #f5f7f7 url("../img/trash.png") center no-repeat;
           background-size: 30px; }
-        #app #interface .interface__btn .btn__icon.icon-decor {
+        #app #interface .interface__btn .btn__icon.icon-decor, #app .interfaces-wrapper .interface__btn .btn__icon.icon-decor {
           background: white url("../img/decor.svg") center no-repeat;
           background-size: 44px; }
-        #app #interface .interface__btn .btn__icon.icon-barnchair {
+        #app #interface .interface__btn .btn__icon.icon-barnchair, #app .interfaces-wrapper .interface__btn .btn__icon.icon-barnchair {
           background: white url("../img/barnchair.svg") center no-repeat;
           background-size: 44px; }
-        #app #interface .interface__btn .btn__icon.icon-decor2 {
+        #app #interface .interface__btn .btn__icon.icon-decor2, #app .interfaces-wrapper .interface__btn .btn__icon.icon-decor2 {
           background: white url("../img/decor2.svg") center no-repeat;
           background-size: 44px; }
-        #app #interface .interface__btn .btn__icon.icon-table {
+        #app #interface .interface__btn .btn__icon.icon-table, #app .interfaces-wrapper .interface__btn .btn__icon.icon-table {
           background: #edf1f2 url("../img/sofa.png") 30px 12px no-repeat;
           background-size: 16px;
           position: relative; }
-          #app #interface .interface__btn .btn__icon.icon-table .table-guest {
+          #app #interface .interface__btn .btn__icon.icon-table .table-guest, #app .interfaces-wrapper .interface__btn .btn__icon.icon-table .table-guest {
             position: absolute;
             top: 7px;
             right: 7px;
             font-weight: 200;
             font-size: 17px;
             font-family: SFD, Helvetica, Arial, sans-serif; }
-        #app #interface .interface__btn .btn__icon.icon-text {
+        #app #interface .interface__btn .btn__icon.icon-text, #app .interfaces-wrapper .interface__btn .btn__icon.icon-text {
           background: #f5f7f7;
           text-align: center;
           font-size: 24px;
           font-family: SFD, Helvetica, Arial, sans-serif;
           line-height: 1.2; }
-        #app #interface .interface__btn .btn__icon.icon-line {
+        #app #interface .interface__btn .btn__icon.icon-line, #app .interfaces-wrapper .interface__btn .btn__icon.icon-line {
           background: white;
           position: relative; }
-          #app #interface .interface__btn .btn__icon.icon-line .line {
+          #app #interface .interface__btn .btn__icon.icon-line .line, #app .interfaces-wrapper .interface__btn .btn__icon.icon-line .line {
             position: absolute;
             width: 22px;
             height: 44px;
             top: 11px;
             left: 23px;
             border-radius: 50px; }
-            #app #interface .interface__btn .btn__icon.icon-line .line.grey {
+            #app #interface .interface__btn .btn__icon.icon-line .line.grey, #app .interfaces-wrapper .interface__btn .btn__icon.icon-line .line.grey {
               background-color: #edf1f2; }
-            #app #interface .interface__btn .btn__icon.icon-line .line.brown {
+            #app #interface .interface__btn .btn__icon.icon-line .line.brown, #app .interfaces-wrapper .interface__btn .btn__icon.icon-line .line.brown {
               background-color: #ebd7ce; }
-            #app #interface .interface__btn .btn__icon.icon-line .line.blue {
+            #app #interface .interface__btn .btn__icon.icon-line .line.blue, #app .interfaces-wrapper .interface__btn .btn__icon.icon-line .line.blue {
               background-color: #96d9fa; }
-        #app #interface .interface__btn .btn__icon.icon-right-plus {
+        #app #interface .interface__btn .btn__icon.icon-right-plus, #app .interfaces-wrapper .interface__btn .btn__icon.icon-right-plus {
           background: #edf1f2 url("../img/right-plus.svg") center no-repeat;
           background-size: 30px; }
-        #app #interface .interface__btn .btn__icon.icon-right-minus {
+        #app #interface .interface__btn .btn__icon.icon-right-minus, #app .interfaces-wrapper .interface__btn .btn__icon.icon-right-minus {
           background: #edf1f2 url("../img/right-minus.svg") center no-repeat;
           background-size: 30px; }
-        #app #interface .interface__btn .btn__icon.icon-bottom-plus {
+        #app #interface .interface__btn .btn__icon.icon-bottom-plus, #app .interfaces-wrapper .interface__btn .btn__icon.icon-bottom-plus {
           background: #edf1f2 url("../img/bottom-plus.svg") center no-repeat;
           background-size: 22px; }
-        #app #interface .interface__btn .btn__icon.icon-bottom-minus {
+        #app #interface .interface__btn .btn__icon.icon-bottom-minus, #app .interfaces-wrapper .interface__btn .btn__icon.icon-bottom-minus {
           background: #edf1f2 url("../img/bottom-minus.svg") center no-repeat;
           background-size: 22px; }
-      #app #interface .interface__btn .btn__text {
+      #app #interface .interface__btn .btn__text, #app .interfaces-wrapper .interface__btn .btn__text {
         text-align: center;
         font-weight: 300;
         margin-top: 5px;
