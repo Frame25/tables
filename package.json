@@ -47,6 +47,7 @@
     "react": "^16.6.3",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.6.3",
+    "react-transition-group": "1.x",
     "svg.js": "^2.6.6",
     "vue": "^2.5.17",
     "vuex": "^3.0.1"

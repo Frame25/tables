@@ -5,6 +5,7 @@ import DrawingClass from '../components/drawing-class'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import EditorMenu from '../components/editor-menu'
 import ElementMenu from '../components/element-menu'
@@ -91,10 +92,11 @@ class Interface extends React.Component {
 
   render () {
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName="fade"
         transitionEnterTimeout={300}
         transitionLeaveTimeout={10}
+        component="div"
       >
         {
           this.state.elementMenu ?
@@ -109,7 +111,7 @@ class Interface extends React.Component {
             <ScaleMenu D={this.state.D} openEditorMenu={this.setEditorMenu} key="2" /> :
             <EditorMenu D={this.state.D} openScaleMenu={this.setScaleMenu} key="3" />
         }
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     )
   }
 }
