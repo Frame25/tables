@@ -442,7 +442,7 @@ svg {
       stroke: #96d9fa;
       stroke-width: 2px;
       stroke-dashoffset: -2px; }
-    #app #drawing .selected-element > tspan {
+    #app #drawing text.selected-element {
       outline: #96d9fa solid 2px; }
     #app #drawing image.selected-element {
       outline: #96d9fa solid 2px; }

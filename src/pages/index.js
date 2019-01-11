@@ -85,7 +85,10 @@ class Interface extends React.Component {
       })
       this.state.D.fillWithPattern()
     }
+    window.D = this.state.D
+
     window.importData = map => this.state.D.importData(map)
+    window.exportData = map => this.state.D.exportData(map)
   }
 
   render () {
