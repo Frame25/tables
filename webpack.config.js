@@ -52,7 +52,8 @@ const build = {
                 sourceMap: true
               }
             },
-            {loader: 'sass-loader'}
+            {loader: 'sass-loader', options: {
+              }}
           ]
         })
       },
@@ -66,16 +67,6 @@ const build = {
           }
         }
       },
-      // Vue
-      {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            extractCSS: true
-          }
-        }
-      }
     ]
   },
   plugins: [

@@ -1,5 +1,5 @@
 import 'normalize.css'
-import '../sass/style.sass'
+import '../sass/style.scss'
 import DrawingClass from '../components/drawing-class'
 // import React from 'react'
 // import ReactDOM from 'react-dom'

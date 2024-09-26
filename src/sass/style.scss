@@ -1,0 +1,296 @@
+@import "fonts";
+@import "defaults";
+
+body {
+  font-family: $SF;
+}
+div {
+  box-sizing: border-box;
+}
+svg {
+  user-select: none;
+}
+#app {
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  #drawing {
+    height: calc(100vh - 110px);
+    width: 100%;
+    position: relative;
+
+    .svg_select_points_point {
+      fill: white;
+      stroke: $blue;
+      stroke-width: 2px;
+      r: 10px;
+  }
+    .selected-element {
+      rect {
+        stroke: $blue;
+        stroke-width: 2px;
+        stroke-dashoffset: -2px;
+    }
+  }
+    text.selected-element {
+      outline: $blue solid 2px;
+  }
+    image.selected-element {
+      outline: $blue solid 2px;
+  }
+    .selected-table {
+      rect {
+        fill: $selected-table;
+    }
+      text {
+        fill: white;
+    }
+  }
+}
+  #interface,
+  .interfaces-wrapper {
+    height: 110px;
+    position: relative;
+    z-index: 10;
+    background: white;
+
+    .editor-menu,
+    .element-menu,
+    .scale-menu {
+      background: white;
+      padding: 11px 30px;
+      overflow: scroll;
+      border-top: solid 1px $elem-grey;
+      height: 110px;
+  }
+    .editor-menu {
+      white-space: nowrap;
+      text-align: center;
+  }
+    .element-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+    .scale-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+    .interface__input {
+      margin-top: -16px;
+      margin-right: 32px;
+      min-width: 180px;
+      &.wide {
+        min-width: 210px;
+    }
+      &.wide {
+        input {
+          width: 150px;
+      }
+    }
+      span {
+        margin-right: 8px;
+    }
+      input {
+        width: 66px;
+        height: 66px;
+        border: solid 1px $grey;
+        border-radius: 8px;
+        padding: 0;
+        font-size: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        font-family: $SFD;
+        font-weight: 200;
+        text-align: center;
+        &:focus {
+          outline: none;
+      }
+    }
+  }
+    .interface__text {
+      margin-right: 16px;
+      font-size: 14px;
+      font-weight: 300;
+      margin-top: -14px;
+  }
+    .interface__btn {
+      display: inline-block;
+      margin-right: 32px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 2px;
+      flex-shrink: 0;
+
+      &:last-child {
+        margin-right: 0;
+    }
+      &.scale-btn {
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 2px;
+          height: 66px;
+          background: $lightgrey;
+          top: 0;
+          right: -15px;
+      }
+    }
+      .text-btn {
+        width: auto;
+        height: 66px;
+        border-radius: 8px;
+        line-height: 1.6;
+        padding: 20px;
+        background: $lightgrey;
+        font-size: 17px;
+        font-weight: 300;
+        margin-top: -17px;
+    }
+      .btn__icon {
+        width: 66px;
+        height: 66px;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 0 auto;
+        &.big {
+          width: 88px;
+          &.icon-table {
+            background-position-x: 52px;
+        }
+          &.icon-decor2 {
+            background-size: 88px;
+        }
+      }
+        &.icon-ruler {
+          background: $lightgrey url('../img/rulers.png') center no-repeat;
+          background-size: 30px;
+      }
+        &.icon-rotate {
+          background: $lightgrey url('../img/rotate.png') center no-repeat;
+          background-size: 30px;
+          &.right {
+            transform: scaleX(-1);
+        }
+      }
+        &.icon-copy {
+          background: $lightgrey url('../img/copy.png') center no-repeat;
+          background-size: 30px;
+      }
+        &.icon-remove {
+          background: $lightgrey url('../img/trash.png') center no-repeat;
+          background-size: 30px;
+      }
+        &.icon-decor {
+          background: white url('../img/decor.svg') center no-repeat;
+          background-size: 44px;
+      }
+        &.icon-barnchair {
+          background: white url('../img/barnchair.svg') center no-repeat;
+          background-size: 44px;
+      }
+        &.icon-decor2 {
+          background: white url('../img/decor2.svg') center no-repeat;
+          background-size: 44px;
+      }
+        &.icon-table {
+          background: $elem-grey url('../img/sofa.png') 30px 12px no-repeat;
+          background-size: 16px;
+          position: relative;
+          .table-guest {
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            font-weight: 200;
+            font-size: 17px;
+            font-family: $SFD;
+        }
+      }
+        &.icon-text {
+          background: $lightgrey;
+          text-align: center;
+          font-size: 24px;
+          font-family: $SFD;
+          line-height: 1.2;
+      }
+        &.icon-line {
+          background: white;
+          position: relative;
+          .line {
+            position: absolute;
+            width: 22px;
+            height: 44px;
+            top: 11px;
+            left: 23px;
+            border-radius: 50px;
+            &.grey {
+              background-color: $elem-grey;
+          }
+            &.brown {
+              background-color: $brown;
+          }
+            &.blue {
+              background-color: $blue;
+          }
+        }
+      }
+        @each $name in ('right-plus', 'right-minus', 'bottom-plus', 'bottom-minus') {
+          &.icon-#{$name} {
+            background: $elem-grey url('../img/#{$name}.svg') center no-repeat;
+            @if $name == 'right-plus' {
+              background-size: 30px;
+          }            @else if $name == 'right-minus' {
+                               background-size: 30px;
+          }            @else if $name == 'bottom-plus' {
+                               background-size: 22px;
+          }            @else if $name == 'bottom-minus' {
+                               background-size: 22px;
+          }
+        }
+      }
+    }
+      .btn__text {
+        text-align: center;
+        font-weight: 300;
+        margin-top: 5px;
+        font-size: 10px;
+    }
+  }
+}
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  @include transition;
+}
+.fade-leave {
+  opacity: 1;
+}
+.fade-leave.fade-leave-active {
+  opacity: 0;
+}
+
+@media screen and (max-width: 767px) {
+#app {
+  #drawing {
+    overflow: scroll;
+    svg {
+      min-width: 1000px;
+  }
+}
+  #interface {
+    .editor-menu,
+    .element-menu,
+    .scale-menu {
+      justify-content: flex-start;
+  }
+}
+}
+};

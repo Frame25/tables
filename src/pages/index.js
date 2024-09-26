@@ -1,5 +1,5 @@
 import 'normalize.css'
-import '../sass/style.sass'
+import '../sass/style.scss'
 import '../libs/select/select.css'
 import DrawingClass from '../components/drawing-class'
 import React from 'react'
