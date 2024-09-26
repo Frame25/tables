@@ -91,18 +91,18 @@ export default class ElementMenu extends Component {
           <input type="text" value={this.state.txt} onChange={this.changeText.bind(this)} />
         </div>
         }
-        {this.props.element.type === 'line' &&
+
         <div className="interface__btn rotate-left" onClick={this.rotateElement.bind(this, 'left')}>
           <div className="btn__icon icon-rotate"></div>
           <div className="btn__text">Повернуть влево</div>
         </div>
-        }
-        {this.props.element.type === 'line' &&
+
+
         <div className="interface__btn rotate-right" onClick={this.rotateElement.bind(this)}>
           <div className="btn__icon icon-rotate right"></div>
           <div className="btn__text">Повернуть вправо</div>
         </div>
-        }
+
         <div className="interface__btn copy-element" onClick={this.copyElement.bind(this)}>
           <div className="btn__icon icon-copy"></div>
           <div className="btn__text">Дублировать</div>
